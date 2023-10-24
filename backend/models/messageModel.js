@@ -10,10 +10,6 @@ const messageSchema = mongoose.Schema(
       type: String,
       required: true,
     },
-    receiverID: {
-      type: String,
-      required: true,
-    },
   },
   {
     timestamps: true,
