@@ -1,8 +1,20 @@
 import express from "express"
 import { PORT, mongoDBURL } from "./config.js"
 import mongoose from "mongoose"
+import userRoute from "./routes/userRoute.js"
 
 const app = express()
+
+//Middleware for parsing request body
+app.use(express.json())
+
+//Home Route
+app.get("/", (req, res) => {
+  console.log(req)
+  return res.status(234).send("Hello World") //Return a result with status 234
+})
+
+app.use("/users", userRoute)
 
 //Connect the app to the database
 mongoose
