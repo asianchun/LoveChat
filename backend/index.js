@@ -20,6 +20,8 @@ app.use("/users", userRoute)
 app.use("/conversations", conversationRoute)
 app.use("/messages", messageRoute)
 
+app.use(cors())
+
 //Connect the app to the database
 mongoose
   .connect(mongoDBURL)
