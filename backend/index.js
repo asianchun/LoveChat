@@ -3,6 +3,7 @@ import { PORT, mongoDBURL } from "./config.js"
 import mongoose from "mongoose"
 import userRoute from "./routes/userRoute.js"
 import conversationRoute from "./routes/conversationRoute.js"
+import messageRoute from "./routes/messageRoute.js"
 
 const app = express()
 
@@ -17,6 +18,7 @@ app.get("/", (req, res) => {
 
 app.use("/users", userRoute)
 app.use("/conversations", conversationRoute)
+app.use("/messages", messageRoute)
 
 //Connect the app to the database
 mongoose
