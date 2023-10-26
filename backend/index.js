@@ -4,11 +4,14 @@ import mongoose from "mongoose"
 import userRoute from "./routes/userRoute.js"
 import conversationRoute from "./routes/conversationRoute.js"
 import messageRoute from "./routes/messageRoute.js"
+import cors from "cors"
 
 const app = express()
 
 //Middleware for parsing request body
 app.use(express.json())
+
+app.use(cors())
 
 //Home Route
 app.get("/", (req, res) => {
@@ -19,8 +22,6 @@ app.get("/", (req, res) => {
 app.use("/users", userRoute)
 app.use("/conversations", conversationRoute)
 app.use("/messages", messageRoute)
-
-app.use(cors())
 
 //Connect the app to the database
 mongoose
