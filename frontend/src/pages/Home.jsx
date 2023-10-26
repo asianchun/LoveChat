@@ -1,5 +1,5 @@
 import React, { useState } from "react"
-import { useNavigate } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import { useAuth } from "../firebase/AuthContext"
 
 const Home = () => {
@@ -19,9 +19,10 @@ const Home = () => {
   }
   return (
     <main>
-      Home
+      Home Page
       {error && <div>{error}</div>}
-      <section>
+      <section className="flex gap-16">
+        <Link to="/profile">My Profile</Link>
         <button onClick={handleClick}>Log Out</button>
       </section>
     </main>
