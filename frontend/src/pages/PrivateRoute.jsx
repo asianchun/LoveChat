@@ -1,16 +1,8 @@
-import { onAuthStateChanged } from "firebase/auth"
-import { useState, useEffect } from "react"
 import { Navigate, Outlet } from "react-router-dom"
-import { auth } from "../firebase/firebase"
+import { useAuth } from "../firebase/AuthContext"
 
 const PrivateRoute = () => {
-  const [currentUser, setCurrentUser] = useState()
-
-  useEffect(() => {
-    onAuthStateChanged(auth, (user) => {
-      setCurrentUser(user)
-    })
-  }, [])
+  const { currentUser } = useAuth()
 
   if (!currentUser) {
     return <Navigate to="/login" replace />
