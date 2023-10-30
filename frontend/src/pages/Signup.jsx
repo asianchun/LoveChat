@@ -18,27 +18,23 @@ const Signup = () => {
   const handleClick = async (event) => {
     event.preventDefault()
 
-    const data = {
-      email,
-      firstName,
-      lastName,
-      phoneNumber,
-    }
-
     try {
       setError("")
       setLoading(true)
-      await signup(email, password)
+      const userCred = await signup(email, password)
+      const user = userCred.user
+      const fireID = user.uid
 
-      axios
-        .post("http://localhost:5555/users", data)
-        .then(() => {
-          navigate("/")
-        })
-        .catch((error) => {
-          setLoading(false)
-          console.log(error)
-        })
+      const data = {
+        email,
+        firstName,
+        lastName,
+        phoneNumber,
+        fireID,
+      }
+
+      await axios.post("http://localhost:5555/users", data)
+      navigate("/")
     } catch (error) {
       setLoading(false)
       setError(error)

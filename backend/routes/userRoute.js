@@ -22,7 +22,7 @@ router.get("/", async (req, res) => {
 router.get("/all/:id", async (req, res) => {
   try {
     const { id } = req.params
-    const users = await User.find({ _id: { $ne: id } })
+    const users = await User.find({ fireID: { $ne: id } })
 
     return res.status(200).json({
       count: users.length,
@@ -38,7 +38,7 @@ router.get("/all/:id", async (req, res) => {
 router.get("/:id", async (req, res) => {
   try {
     const { id } = req.params
-    const user = await User.findById(id)
+    const user = await User.find({ fireID: { $eq: id } })
 
     return res.status(200).json(user)
   } catch (error) {
@@ -66,6 +66,7 @@ router.post("/", async (req, res) => {
       firstName: req.body.firstName,
       lastName: req.body.lastName,
       phoneNumber: req.body.phoneNumber,
+      fireID: req.body.fireID,
     }
 
     const user = await User.create(newUser)
