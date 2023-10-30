@@ -16,7 +16,6 @@ const Profile = () => {
       .get(`http://localhost:5555/users/${currentUser.uid}`)
       .then((response) => {
         setUser(response.data[0])
-        console.log(user)
         setLoading(false)
       })
       .catch((error) => {
