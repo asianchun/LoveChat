@@ -7,7 +7,6 @@ import Conversations from "../components/Home/Conversations"
 import ChatBox from "../components/Home/Chatbox"
 
 const Home = () => {
-  const [error, setError] = useState()
   const [loading, setLoading] = useState(false)
   const [conversations, setConversations] = useState([])
   const [messages, setMessages] = useState([])
@@ -47,7 +46,6 @@ const Home = () => {
   return (
     <main>
       Home Page
-      {error && <div>{error}</div>}
       <section className="flex gap-16">
         <Link to="/profile">My Profile</Link>
         <button onClick={logoutUser}>Log Out</button>
