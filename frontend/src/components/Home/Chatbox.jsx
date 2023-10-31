@@ -11,11 +11,13 @@ const ChatBox = ({ conversation }) => {
 
   useEffect(() => {
     if (conversation !== null) {
-      const data = conversation.messages.slice().sort((a, b) => {
-        return a.createdAt - b.createdAt
-      })
+      if (conversation.messages.length !== 0) {
+        const data = conversation.messages.slice().sort((a, b) => {
+          return a.createdAt - b.createdAt
+        })
 
-      setMessages(data)
+        setMessages(data)
+      }
     }
   }, [conversation])
 

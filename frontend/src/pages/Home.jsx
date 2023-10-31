@@ -5,6 +5,7 @@ import axios from "axios"
 import Spinner from "../components/Spinner"
 import Conversations from "../components/Home/Conversations"
 import ChatBox from "../components/Home/Chatbox"
+import SearchPopup from "../components/SearchPopup"
 
 const Home = () => {
   const [loading, setLoading] = useState(false)
@@ -54,7 +55,7 @@ const Home = () => {
         <button onClick={logoutUser}>Log Out</button>
       </section>
       <section>
-        Add conversation
+        <SearchPopup />
         <div>All conversations</div>
         {loading ? (
           <Spinner />
