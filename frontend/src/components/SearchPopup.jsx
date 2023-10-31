@@ -10,6 +10,11 @@ const SearchPopup = ({ update }) => {
   const [showModal, setShowModal] = useState(false)
   const { currentUser } = useAuth()
 
+  const closeModal = (event) => {
+    setShowModal(false)
+    setSearch("")
+  }
+
   useEffect(() => {
     axios
       .get(`http://localhost:5555/users/all/${currentUser.uid}`)
@@ -85,44 +90,41 @@ const SearchPopup = ({ update }) => {
       >
         Add conversation
       </button>
-      {showModal ? (
-        <>
-          <div
-            className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none"
-            onClick={() => setShowModal(false)}
-          >
-            <div className="relative w-auto my-6 mx-auto max-w-3xl">
-              {/*content*/}
-              <div className="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
-                {/*header*/}
-                <div className="flex items-start justify-between p-5 border-b border-solid border-blueGray-200 rounded-t">
-                  <input
-                    type="text"
-                    placeholder="Search for user"
-                    value={search}
-                    onChange={(e) => setSearch(e.target.value)}
-                  />
-                </div>
-                {/*body*/}
-                {filteredUsers.map((user) => (
-                  <div
-                    key={user._id}
-                    onClick={() => {
-                      setSelectedUser(user)
-                    }}
-                  >
-                    <h1>
-                      {user.firstName} {user.lastName}
-                    </h1>
-                    <p>{user.email}</p>
-                  </div>
-                ))}
-              </div>
-            </div>
+      <div
+        onClick={closeModal}
+        className={`fixed inset-0 flex justify-center items-center transition-colors ${
+          showModal ? "visible bg-black/20" : "invisible"
+        }`}
+      >
+        <div
+          onClick={(e) => e.stopPropagation()}
+          className={`bg-white rounded-xl shadow p-6 transition-all ${
+            showModal ? "scale-100 opacity-100" : "scale-125 opacity-0"
+          }`}
+        >
+          <div className="flex items-start justify-between p-5 border-b border-solid border-blueGray-200 rounded-t">
+            <input
+              type="text"
+              placeholder="Search for user"
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
+            />
           </div>
-          <div className="opacity-25 fixed inset-0 z-40 bg-black"></div>
-        </>
-      ) : null}
+          {filteredUsers.map((user) => (
+            <div
+              key={user._id}
+              onClick={() => {
+                setSelectedUser(user)
+              }}
+            >
+              <h1>
+                {user.firstName} {user.lastName}
+              </h1>
+              <p>{user.email}</p>
+            </div>
+          ))}
+        </div>
+      </div>
     </>
   )
 }
