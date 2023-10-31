@@ -3,7 +3,7 @@ import { useAuth } from "../../firebase/AuthContext"
 import axios from "axios"
 import Spinner from "../Spinner"
 
-const ChatBox = ({ conversation }) => {
+const ChatBox = ({ conversation, update }) => {
   const { currentUser } = useAuth()
   const [text, setText] = useState("")
   const [messages, setMessages] = useState([])
@@ -17,6 +17,8 @@ const ChatBox = ({ conversation }) => {
         })
 
         setMessages(data)
+      } else {
+        setMessages([])
       }
     }
   }, [conversation])
@@ -47,6 +49,7 @@ const ChatBox = ({ conversation }) => {
 
       setMessages(result.data.messages)
       setLoading(false)
+      update(result.data)
     }
   }
 

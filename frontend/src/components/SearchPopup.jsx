@@ -6,12 +6,9 @@ import { useAuth } from "../firebase/AuthContext"
 const SearchPopup = () => {
   const [search, setSearch] = useState("")
   const [users, setUsers] = useState([])
+  const [selectedUser, setSelectedUser] = useState(null)
   const [filteredUsers, setFilteredUsers] = useState([])
   const { currentUser } = useAuth()
-
-  const createConversation = (e) => {
-    console.log("Created")
-  }
 
   useEffect(() => {
     axios
@@ -36,6 +33,29 @@ const SearchPopup = () => {
     }
   }, [search])
 
+  useEffect(() => {
+    if (selectedUser !== null) {
+      axios
+        .get(`http://localhost:5555/users/${currentUser.uid}`)
+        .then((response) => {
+          const data = {
+            messages: [],
+            participants: [response.data[0], selectedUser],
+          }
+
+          axios
+            .post("http://localhost:5555/conversations", data)
+            .then((response) => {})
+            .catch((error) => {
+              console.log(error)
+            })
+        })
+        .catch((error) => {
+          console.log(error)
+        })
+    }
+  }, [selectedUser])
+
   return (
     <Popup trigger={<button> Add conversation</button>} modal>
       <input
@@ -45,7 +65,12 @@ const SearchPopup = () => {
         onChange={(e) => setSearch(e.target.value)}
       />
       {filteredUsers.map((user) => (
-        <div key={user._id} onClick={createConversation}>
+        <div
+          key={user._id}
+          onClick={() => {
+            setSelectedUser(user)
+          }}
+        >
           <h1>
             {user.firstName} {user.lastName}
           </h1>

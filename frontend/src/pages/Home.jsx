@@ -29,6 +29,17 @@ const Home = () => {
     setCurrentConversation(conversation)
   }
 
+  const updateConversations = (updated) => {
+    const update = conversations.map((conversation) => {
+      if (conversation._id === updated._id) {
+        return updated
+      }
+      return conversation
+    })
+
+    setConversations(update)
+  }
+
   useEffect(() => {
     setLoading(true)
 
@@ -66,7 +77,10 @@ const Home = () => {
           />
         )}
       </section>
-      <ChatBox conversation={currentConversation} />
+      <ChatBox
+        conversation={currentConversation}
+        update={updateConversations}
+      />
     </main>
   )
 }
