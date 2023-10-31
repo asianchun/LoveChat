@@ -1,6 +1,9 @@
 import React from "react"
+import { useAuth } from "../../firebase/AuthContext"
 
 const Conversations = ({ conversations, onHandleClick }) => {
+  const { currentUser } = useAuth()
+
   return (
     <div>
       {conversations.length === 0 ? (
@@ -17,7 +20,15 @@ const Conversations = ({ conversations, onHandleClick }) => {
               onHandleClick(messages)
             }}
           >
-            {conversation.createdAt}
+            {conversation.participants.map((participant) =>
+              participant.fireID !== currentUser.uid ? (
+                <p key={participant._id}>
+                  {participant.firstName} {participant.lastName}
+                </p>
+              ) : (
+                ""
+              )
+            )}
           </div>
         ))
       )}

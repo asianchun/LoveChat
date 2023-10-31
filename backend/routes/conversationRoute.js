@@ -23,7 +23,7 @@ router.get("/:id", async (req, res) => {
   try {
     const { id } = req.params
     const conversations = await Conversation.find({
-      participants: { $in: [id] },
+      "participants.fireID": id,
     })
 
     return res.status(200).json({
