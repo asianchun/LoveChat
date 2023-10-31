@@ -29,6 +29,11 @@ const Home = () => {
     setCurrentConversation(conversation)
   }
 
+  const addConversation = (conversation) => {
+    setConversations([...conversations, conversation])
+    setCurrentConversation(conversation)
+  }
+
   const updateConversations = (updated) => {
     const update = conversations.map((conversation) => {
       if (conversation._id === updated._id) {
@@ -66,7 +71,7 @@ const Home = () => {
         <button onClick={logoutUser}>Log Out</button>
       </section>
       <section>
-        <SearchPopup />
+        <SearchPopup update={addConversation} />
         <div>All conversations</div>
         {loading ? (
           <Spinner />
