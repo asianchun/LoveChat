@@ -9,7 +9,7 @@ import ChatBox from "../components/Home/Chatbox"
 const Home = () => {
   const [loading, setLoading] = useState(false)
   const [conversations, setConversations] = useState([])
-  const [messages, setMessages] = useState([])
+  const [currentConversation, setCurrentConversation] = useState(null)
   const { currentUser, logout } = useAuth()
   const navigate = useNavigate()
 
@@ -24,8 +24,8 @@ const Home = () => {
     }
   }
 
-  const setConversationMessages = (messages) => {
-    setMessages(messages)
+  const setConversationMessages = (conversation) => {
+    setCurrentConversation(conversation)
   }
 
   useEffect(() => {
@@ -35,6 +35,9 @@ const Home = () => {
       .get(`http://localhost:5555/conversations/${currentUser.uid}`)
       .then((response) => {
         setConversations(response.data.data)
+        setCurrentConversation(
+          response.data.data[response.data.data.length - 1]
+        )
         setLoading(false)
       })
       .catch((error) => {
@@ -62,7 +65,7 @@ const Home = () => {
           />
         )}
       </section>
-      <ChatBox messages={messages} />
+      <ChatBox conversation={currentConversation} />
     </main>
   )
 }

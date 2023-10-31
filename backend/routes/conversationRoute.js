@@ -73,15 +73,19 @@ router.put("/:id", async (req, res) => {
     const newMessage = req.body.message
     messages.push(newMessage)
 
-    const result = await Conversation.findByIdAndUpdate(id, {
-      $set: { messages: messages },
-    })
+    const result = await Conversation.findByIdAndUpdate(
+      id,
+      {
+        $set: { messages: messages },
+      },
+      { new: true }
+    )
 
     if (!result) {
       return res.status(404).json({ message: "Conversation not found" })
     }
 
-    return res.status(200).send({ message: messages })
+    return res.status(201).send(result)
   } catch (error) {
     console.log(error.message)
     res.status(500).send({ message: error.message })

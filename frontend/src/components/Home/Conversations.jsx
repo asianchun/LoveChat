@@ -13,11 +13,7 @@ const Conversations = ({ conversations, onHandleClick }) => {
           <div
             key={conversation._id}
             onClick={() => {
-              const messages = conversation.messages.slice().sort((a, b) => {
-                return a.createdAt - b.createdAt
-              })
-
-              onHandleClick(messages)
+              onHandleClick(conversation)
             }}
           >
             {conversation.participants.map((participant) =>
