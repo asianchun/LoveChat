@@ -30,7 +30,14 @@ const Home = () => {
   }
 
   const addConversation = (conversation) => {
-    setConversations([...conversations, conversation])
+    const isExistingConversation = conversations.some(
+      (convo) => convo._id === conversation._id
+    )
+
+    if (!isExistingConversation) {
+      setConversations([...conversations, conversation])
+    }
+
     setCurrentConversation(conversation)
   }
 

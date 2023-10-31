@@ -36,26 +36,43 @@ const SearchPopup = ({ update }) => {
   useEffect(() => {
     if (selectedUser !== null) {
       setShowModal(false)
-      axios
-        .get(`http://localhost:5555/users/${currentUser.uid}`)
-        .then((response) => {
-          const data = {
-            messages: [],
-            participants: [response.data[0], selectedUser],
-          }
 
-          axios
-            .post("http://localhost:5555/conversations", data)
-            .then((response) => {
-              update(response.data)
-            })
-            .catch((error) => {
-              console.log(error)
-            })
+      axios
+        .get(
+          `http://localhost:5555/conversations/check/${currentUser.uid}/${selectedUser.fireID}`
+        )
+        .then((res) => {
+          if (res.data.data.length === 0) {
+            axios
+              .get(`http://localhost:5555/users/${currentUser.uid}`)
+              .then((response) => {
+                const data = {
+                  messages: [],
+                  participants: [response.data[0], selectedUser],
+                }
+
+                axios
+                  .post("http://localhost:5555/conversations", data)
+                  .then((response) => {
+                    update(response.data)
+                  })
+                  .catch((error) => {
+                    console.log(error)
+                  })
+              })
+              .catch((error) => {
+                console.log(error)
+              })
+          } else {
+            update(res.data.data[0])
+          }
         })
         .catch((error) => {
           console.log(error)
         })
+
+      setSelectedUser(null)
+      setSearch("")
     }
   }, [selectedUser])
 
@@ -85,14 +102,6 @@ const SearchPopup = ({ update }) => {
                     value={search}
                     onChange={(e) => setSearch(e.target.value)}
                   />
-                  <button
-                    className="p-1 ml-auto bg-transparent border-0 text-black opacity-5 float-right text-3xl leading-none font-semibold outline-none focus:outline-none"
-                    onClick={() => setShowModal(false)}
-                  >
-                    <span className="bg-transparent text-black opacity-5 h-6 w-6 text-2xl block outline-none focus:outline-none">
-                      ×
-                    </span>
-                  </button>
                 </div>
                 {/*body*/}
                 {filteredUsers.map((user) => (

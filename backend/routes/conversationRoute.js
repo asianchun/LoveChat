@@ -36,6 +36,28 @@ router.get("/:id", async (req, res) => {
   }
 })
 
+//Check if a conversation already exists
+router.get("/check/:id/:another", async (req, res) => {
+  try {
+    const { id, another } = req.params
+
+    const conversation = await Conversation.find({
+      "participants.fireID": { $all: [id, another] },
+    })
+
+    if (!conversation) {
+      return res.status(404).json({ message: "Conversation not found" })
+    }
+
+    return res.status(200).json({
+      data: conversation,
+    })
+  } catch (error) {
+    console.log(error)
+    res.status(500).send({ message: error.message })
+  }
+})
+
 //Add a new conversation
 router.post("/", async (req, res) => {
   try {
