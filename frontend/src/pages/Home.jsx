@@ -6,12 +6,14 @@ import Spinner from "../components/Spinner"
 import Conversations from "../components/Home/Conversations"
 import ChatBox from "../components/Home/Chatbox"
 import SearchPopup from "../components/SearchPopup"
+import { io } from "socket.io-client"
 
 const Home = () => {
   const [loading, setLoading] = useState(false)
   const [conversations, setConversations] = useState([])
   const [currentConversation, setCurrentConversation] = useState(null)
   const { currentUser, logout } = useAuth()
+  const [socket, setSocket] = useState(null)
   const navigate = useNavigate()
 
   const logoutUser = async (event) => {
@@ -55,6 +57,12 @@ const Home = () => {
   useEffect(() => {
     setLoading(true)
 
+    const socket = io("http://localhost:5555", {
+      transports: ["websocket"],
+    })
+
+    setSocket(socket)
+
     axios
       .get(`http://localhost:5555/conversations/${currentUser.uid}`)
       .then((response) => {
@@ -69,6 +77,13 @@ const Home = () => {
         setLoading(false)
       })
   }, [])
+
+  useEffect(() => {
+    socket.on("connect", () => {
+      console.log("Connected to the socket")
+    })
+    return () => {}
+  }, [socket])
 
   return (
     <main>

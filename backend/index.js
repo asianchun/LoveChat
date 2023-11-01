@@ -5,6 +5,7 @@ import userRoute from "./routes/userRoute.js"
 import conversationRoute from "./routes/conversationRoute.js"
 import messageRoute from "./routes/messageRoute.js"
 import cors from "cors"
+import { Server } from "socket.io"
 
 const app = express()
 
@@ -29,8 +30,15 @@ mongoose
   .then(() => {
     console.log("App connected to database")
     //Creates a server for us to use
-    app.listen(PORT, () => {
+    const server = app.listen(PORT, () => {
       console.log(`App is listening to port: ${PORT}`)
+    })
+
+    //Initialize web socket
+    const io = new Server(server)
+
+    io.on("connection", (socket) => {
+      console.log("Connected")
     })
   })
   .catch((error) => {
