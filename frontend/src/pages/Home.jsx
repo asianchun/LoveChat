@@ -46,6 +46,9 @@ const Home = () => {
   const updateConversations = (updated) => {
     const update = conversations.map((conversation) => {
       if (conversation._id === updated._id) {
+        if (updated._id === currentConversation._id) {
+          setCurrentConversation(updated)
+        }
         return updated
       }
       return conversation
@@ -57,12 +60,28 @@ const Home = () => {
   useEffect(() => {
     setLoading(true)
 
+    //Connect to web socket server
     const socket = io("http://localhost:5555", {
       transports: ["websocket"],
     })
-
     setSocket(socket)
 
+    //Set up event listeners for incoming messages
+    socket.on("connect", () => {
+      console.log("Connected to the socket")
+    })
+
+    socket.on("disconnect", () => {
+      console.log("Disconnected from the socket")
+    })
+
+    //Receiving web socket data
+    socket.on("message", (data) => {
+      console.log("Received")
+      updateConversations(data)
+    })
+
+    //Get all the conversations of a user
     axios
       .get(`http://localhost:5555/conversations/${currentUser.uid}`)
       .then((response) => {
@@ -76,14 +95,12 @@ const Home = () => {
         console.log(error)
         setLoading(false)
       })
-  }, [])
 
-  useEffect(() => {
-    socket.on("connect", () => {
-      console.log("Connected to the socket")
-    })
-    return () => {}
-  }, [socket])
+    //Clean up on unmount
+    return () => {
+      socket.disconnect()
+    }
+  }, [])
 
   return (
     <main>
@@ -107,6 +124,7 @@ const Home = () => {
       <ChatBox
         conversation={currentConversation}
         update={updateConversations}
+        socket={socket}
       />
     </main>
   )

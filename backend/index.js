@@ -39,6 +39,10 @@ mongoose
 
     io.on("connection", (socket) => {
       console.log("Connected")
+      socket.on("message", (message) => {
+        console.log(`Received message: ${message}`)
+        io.emit("message", message)
+      })
     })
   })
   .catch((error) => {
