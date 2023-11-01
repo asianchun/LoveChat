@@ -9,16 +9,18 @@ import { AuthProvider } from "./firebase/AuthContext"
 
 const App = () => {
   return (
-    <AuthProvider>
-      <Routes>
-        <Route element={<PrivateRoute />}>
-          <Route path="/" element={<Home />} />
-          <Route path="/profile" element={<Profile />} />
-        </Route>
-        <Route path="/signup" element={<Signup />} />
-        <Route path="/login" element={<Login />} />
-      </Routes>
-    </AuthProvider>
+    <main className="relative">
+      <AuthProvider>
+        <Routes>
+          <Route element={<PrivateRoute />}>
+            <Route path="/" element={<Home />} />
+            <Route path="/profile" element={<Profile />} />
+          </Route>
+          <Route path="/signup" element={<Signup />} />
+          <Route path="/login" element={<Login />} />
+        </Routes>
+      </AuthProvider>
+    </main>
   )
 }
 

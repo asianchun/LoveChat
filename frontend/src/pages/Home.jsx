@@ -16,21 +16,23 @@ const Home = () => {
   const [socket, setSocket] = useState(null)
   const navigate = useNavigate()
 
+  //Logout the user
   const logoutUser = async (event) => {
-    setError("")
-
     try {
       await logout()
       navigate("/login")
     } catch (error) {
-      setError(error)
+      console.log(error)
     }
   }
 
+  //Update the current conversation
   const setConversationMessages = (conversation) => {
     setCurrentConversation(conversation)
   }
 
+  //Add a new conversation if it doesn't exist
+  //Open the selected conversation
   const addConversation = (conversation) => {
     const isExistingConversation = conversations.some(
       (convo) => convo._id === conversation._id
@@ -43,6 +45,7 @@ const Home = () => {
     setCurrentConversation(conversation)
   }
 
+  //Update the conversation in the list of all conversations
   const updateConversations = (updated) => {
     const update = conversations.map((conversation) => {
       if (conversation._id === updated._id) {
