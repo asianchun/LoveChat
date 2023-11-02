@@ -64,7 +64,7 @@ const Signup = () => {
         <h2 className="text-3xl font-semibold font-montserrat mb-5">
           Create the best connections
         </h2>
-        <div className="px-7 py-5 border rounded-xl w-[370px] shadow-xl">
+        <div className="p-10 border rounded-xl w-[400px] shadow-xl mx-5">
           {error && (
             <Snackbar
               type="error"

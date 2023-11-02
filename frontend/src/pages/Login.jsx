@@ -40,7 +40,7 @@ const Login = () => {
   return (
     <main className="relative">
       <div className="flex items-center justify-center h-screen w-screen">
-        <div className="px-7 py-5 border rounded-xl w-[370px] shadow-xl">
+        <div className="p-10 border rounded-xl w-[400px] shadow-xl mx-5">
           <h2 className="text-3xl font-semibold font-montserrat">Sign In</h2>
           <p className="mb-7 font-montserrat">
             Continue your connection journey
@@ -87,13 +87,15 @@ const Login = () => {
               </button>
             </div>
           </form>
-          <button
-            onClick={() => navigate("/signup")}
-            disabled={loading}
-            className="button btn-white mb-2"
-          >
-            Sign up
-          </button>
+          <div className="text-center">
+            <button
+              onClick={() => navigate("/signup")}
+              disabled={loading}
+              className="button btn-white mb-2"
+            >
+              Sign up
+            </button>
+          </div>
         </div>
       </div>
     </main>

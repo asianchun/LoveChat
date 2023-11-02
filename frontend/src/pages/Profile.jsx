@@ -80,7 +80,7 @@ const Profile = () => {
                 <span className="text-green-300">Hey,</span> {fullName}!
               </span>
             </h2>
-            <div className="px-7 py-5 border rounded-xl w-[370px] shadow-xl">
+            <div className="p-10 border rounded-xl w-[400px] shadow-xl mx-5">
               {error && (
                 <Snackbar
                   type="error"
