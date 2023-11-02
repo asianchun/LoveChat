@@ -13,3 +13,14 @@
   box-sizing: border-box;
   scroll-behavior: smooth;
 }
+
+@layer components {
+  .input {
+    @apply bg-white border-black border shadow-sm rounded-md px-2 py-1.5 font-palanquin focus:outline-none focus:border-green-300 focus:ring-1 focus:ring-green-300
+    disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none;
+  }
+
+  .button {
+    @apply border rounded-3xl py-2 w-full font-montserrat;
+  }
+}

@@ -72,7 +72,7 @@ const Signup = () => {
             />
           )}
           <form>
-            <div className="flex flex-col mb-2">
+            <div className="flex flex-col mb-4">
               <label htmlFor="first-name">First Name</label>
               <input
                 type="text"
@@ -85,11 +85,10 @@ const Signup = () => {
                 onChange={(e) =>
                   setFirstName(e.target.value.replace(/[^a-zA-Z\s]+/g, ""))
                 }
-                className="bg-white border-black border shadow-sm rounded-md px-2 py-1.5 mb-2 font-palanquin focus:outline-none focus:border-green-300 focus:ring-1 focus:ring-green-300
-              disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none"
+                className="input"
               />
             </div>
-            <div className="flex flex-col mb-2">
+            <div className="flex flex-col mb-4">
               <label htmlFor="last-name">Last Name</label>
               <input
                 type="text"
@@ -102,11 +101,10 @@ const Signup = () => {
                 onChange={(e) =>
                   setLastName(e.target.value.replace(/[^a-zA-Z\s]+/g, ""))
                 }
-                className="bg-white border-black border shadow-sm rounded-md px-2 py-1.5 mb-2 font-palanquin focus:outline-none focus:border-green-300 focus:ring-1 focus:ring-green-300
-              disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none"
+                className="input"
               />
             </div>
-            <div className="flex flex-col mb-2">
+            <div className="flex flex-col mb-4">
               <label htmlFor="phone">Phone Number</label>
               <input
                 type="text"
@@ -120,11 +118,10 @@ const Signup = () => {
                 onChange={(e) => {
                   setPhone(e.target.value.replace(/[^0-9]/g, ""))
                 }}
-                className="bg-white border-black border shadow-sm rounded-md px-2 py-1.5 mb-2 font-palanquin focus:outline-none focus:border-green-300 focus:ring-1 focus:ring-green-300
-              disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none"
+                className="input"
               />
             </div>
-            <div className="flex flex-col mb-2">
+            <div className="flex flex-col mb-4">
               <label htmlFor="email">Email</label>
               <input
                 type="email"
@@ -135,8 +132,7 @@ const Signup = () => {
                 placeholder="example@email.com"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                className="bg-white border-black border shadow-sm rounded-md px-2 py-1.5 mb-2 font-palanquin focus:outline-none focus:border-green-300 focus:ring-1 focus:ring-green-300
-              disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none"
+                className="input"
               />
             </div>
             <div className="flex flex-col mb-9 relative">
@@ -150,8 +146,7 @@ const Signup = () => {
                 placeholder="********"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                className="bg-white border-black border shadow-sm rounded-md px-2 py-1.5 mb-2 font-palanquin focus:outline-none focus:border-green-300 focus:ring-1 focus:ring-green-300
-              disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none"
+                className="input"
               />
               <button
                 className="absolute right-2 top-[30px] slate text-green-400 font-palanquin disabled:text-slate-500"
@@ -165,7 +160,7 @@ const Signup = () => {
               <button
                 onClick={handleClick}
                 disabled={loading}
-                className="border rounded-3xl py-2 w-full text-[#04364A] bg-green-300 font-montserrat hover:bg-green-400"
+                className="button text-[#04364A] bg-green-300 hover:bg-green-400"
               >
                 Sign Up
               </button>

@@ -52,10 +52,9 @@ const Login = () => {
             />
           )}
           <form>
-            <div className="flex flex-col">
+            <div className="flex flex-col mb-4">
               <input
-                className="bg-white border-black border shadow-sm rounded-md px-2 py-1.5 mb-2 font-palanquin focus:outline-none focus:border-green-300 focus:ring-1 focus:ring-green-300
-              disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none"
+                className="input"
                 type="email"
                 id="email"
                 name="email"
@@ -65,10 +64,9 @@ const Login = () => {
                 onChange={(e) => setEmail(e.target.value)}
               />
             </div>
-            <div className="flex flex-col mt-2 relative">
+            <div className="flex flex-col relative">
               <input
-                className="bg-white border border-black rounded-md px-2 py-1.5 shadow-sm font-palanquin focus:outline-none focus:border-green-300 focus:ring-1 focus:ring-green-300
-              disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none"
+                className="input"
                 type={showPassword ? "text" : "password"}
                 id="password"
                 name="password"
@@ -89,7 +87,7 @@ const Login = () => {
               <button
                 onClick={handleClick}
                 disabled={loading}
-                className="border rounded-3xl py-2 w-full text-[#04364A] bg-green-300 font-montserrat hover:bg-green-400"
+                className="button text-[#04364A] bg-green-300 hover:bg-green-400"
               >
                 Login
               </button>
@@ -98,7 +96,7 @@ const Login = () => {
           <button
             onClick={() => navigate("/signup")}
             disabled={loading}
-            className="text-center border rounded-3xl py-2 mb-2 w-full border-black text-slate-500 font-montserrat hover:bg-slate-200"
+            className="button border-black text-slate-500 hover:bg-slate-200 mb-2"
           >
             Sign up
           </button>
