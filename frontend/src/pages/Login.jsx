@@ -1,7 +1,6 @@
 import { useState } from "react"
 import { useAuth } from "../firebase/AuthContext"
 import { useNavigate } from "react-router-dom"
-import Spinner from "../components/Spinner"
 
 const Login = () => {
   const [email, setEmail] = useState("")
@@ -52,7 +51,7 @@ const Login = () => {
           <div className="flex flex-col">
             <input
               className="bg-white border-black border shadow-sm rounded-md px-2 py-1.5 mb-2 font-palanquin focus:outline-none focus:border-green-300 focus:ring-1 focus:ring-green-300
-              disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none"
+              disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none hover:ring-1 hover:ring-black"
               type="email"
               id="email"
               name="email"
@@ -65,7 +64,7 @@ const Login = () => {
           <div className="flex flex-col mt-2 relative">
             <input
               className="bg-white border border-black rounded-md px-2 py-1.5 shadow-sm font-palanquin focus:outline-none focus:border-green-300 focus:ring-1 focus:ring-green-300
-              disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none"
+              disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none hover:ring-1 hover:ring-black"
               type={showPassword ? "text" : "password"}
               id="password"
               name="password"
@@ -75,7 +74,7 @@ const Login = () => {
               onChange={(e) => setPassword(e.target.value)}
             />
             <button
-              className="absolute right-2 top-[7px] slate text-green-400 font-palanquin disabled:text-slate-500"
+              className="absolute right-2 top-[6px] slate text-green-400 font-palanquin disabled:text-slate-500"
               onClick={toggleShow}
               disabled={loading}
             >
