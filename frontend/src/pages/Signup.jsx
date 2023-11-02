@@ -2,6 +2,7 @@ import { Link, useNavigate } from "react-router-dom"
 import { useState } from "react"
 import { useAuth } from "../firebase/AuthContext"
 import axios from "axios"
+import Snackbar from "../components/Snackbar"
 
 const Signup = () => {
   const [email, setEmail] = useState("")
@@ -64,12 +65,11 @@ const Signup = () => {
         </h2>
         <div className="px-7 py-5 border rounded-xl w-[370px] shadow-xl">
           {error && (
-            <div
-              className="bg-red-200 border border-red-400 text-slate-600 font-montserrat font-semibold text-center mb-2 rounded-md py-3 hover:cursor-pointer"
-              onClick={() => setError("")}
-            >
-              Email already exists
-            </div>
+            <Snackbar
+              type="error"
+              action={() => setError("")}
+              text="Email already exists"
+            />
           )}
           <form>
             <div className="flex flex-col mb-2">

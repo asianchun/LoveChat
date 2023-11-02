@@ -1,6 +1,7 @@
 import { useState } from "react"
 import { useAuth } from "../firebase/AuthContext"
 import { useNavigate } from "react-router-dom"
+import Snackbar from "../components/Snackbar"
 
 const Login = () => {
   const [email, setEmail] = useState("")
@@ -44,12 +45,11 @@ const Login = () => {
             Continue your connection journey
           </p>
           {error && (
-            <div
-              className="bg-red-200 border border-red-400 text-slate-600 font-montserrat font-semibold text-center mb-2 rounded-md py-3 hover:cursor-pointer"
-              onClick={() => setError("")}
-            >
-              Invalid email or password
-            </div>
+            <Snackbar
+              type="error"
+              action={() => setError("")}
+              text="Invalid email or password"
+            />
           )}
           <form>
             <div className="flex flex-col">

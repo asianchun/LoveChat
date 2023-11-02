@@ -3,6 +3,7 @@ import axios from "axios"
 import { useAuth } from "../firebase/AuthContext"
 import BackButton from "../components/BackButton"
 import Spinner from "../components/Spinner"
+import Snackbar from "../components/Snackbar"
 
 const Profile = () => {
   const [firstName, setFirstName] = useState("")
@@ -78,20 +79,18 @@ const Profile = () => {
             </h2>
             <div className="px-7 py-5 border rounded-xl w-[370px] shadow-xl">
               {error && (
-                <div
-                  className="bg-red-200 border border-red-400 text-slate-600 font-semibold font-montserrat text-center mb-2 rounded-md py-3 hover:cursor-pointer"
-                  onClick={() => setError("")}
-                >
-                  Something went wrong
-                </div>
+                <Snackbar
+                  type="error"
+                  action={() => setError("")}
+                  text="Something went wrong"
+                />
               )}
               {success && (
-                <div
-                  className="bg-green-200 border border-green-400 text-black font-montserrat text-center mb-2 rounded-md py-3 hover:cursor-pointer"
-                  onClick={() => setSuccess("")}
-                >
-                  {success}!
-                </div>
+                <Snackbar
+                  type="success"
+                  action={() => setSuccess("")}
+                  text={`${success}!`}
+                />
               )}
               <form>
                 <div className="flex flex-col mb-2">
