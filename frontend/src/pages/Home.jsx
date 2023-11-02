@@ -16,16 +16,6 @@ const Home = () => {
   const [socket, setSocket] = useState(null)
   const navigate = useNavigate()
 
-  //Logout the user
-  const logoutUser = async (event) => {
-    try {
-      await logout()
-      navigate("/login")
-    } catch (error) {
-      console.log(error)
-    }
-  }
-
   //Update the current conversation
   const setConversationMessages = (conversation) => {
     setCurrentConversation(conversation)
@@ -107,11 +97,6 @@ const Home = () => {
 
   return (
     <main>
-      Home Page
-      <section className="flex gap-16">
-        <Link to="/profile">My Profile</Link>
-        <button onClick={logoutUser}>Log Out</button>
-      </section>
       <section>
         <SearchPopup update={addConversation} />
         <div>All conversations</div>

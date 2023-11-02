@@ -6,10 +6,12 @@ import Login from "./pages/Login"
 import Profile from "./pages/Profile"
 import PrivateRoute from "./pages/PrivateRoute"
 import { AuthProvider } from "./firebase/AuthContext"
+import TopBar from "./components/TopBar"
 
 const App = () => {
   return (
     <AuthProvider>
+      <TopBar />
       <Routes>
         <Route element={<PrivateRoute />}>
           <Route path="/" element={<Home />} />
