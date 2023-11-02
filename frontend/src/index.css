@@ -23,4 +23,12 @@
   .button {
     @apply border rounded-3xl py-2 w-full font-montserrat;
   }
+
+  .btn-green {
+    @apply text-[#04364A] bg-green-300 hover:bg-green-400;
+  }
+
+  .btn-white {
+    @apply border-black text-slate-500 hover:bg-slate-200;
+  }
 }

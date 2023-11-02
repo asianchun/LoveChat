@@ -140,7 +140,7 @@ const Profile = () => {
                   <button
                     onClick={handleClick}
                     disabled={loading}
-                    className="button text-[#04364A] bg-green-300 hover:bg-green-400"
+                    className="button btn-green"
                   >
                     Save
                   </button>

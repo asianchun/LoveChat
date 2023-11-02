@@ -83,7 +83,7 @@ const Login = () => {
               <button
                 onClick={handleClick}
                 disabled={loading}
-                className="button text-[#04364A] bg-green-300 hover:bg-green-400"
+                className="button btn-green"
               >
                 Login
               </button>
@@ -92,7 +92,7 @@ const Login = () => {
           <button
             onClick={() => navigate("/signup")}
             disabled={loading}
-            className="button border-black text-slate-500 hover:bg-slate-200 mb-2"
+            className="button btn-white mb-2"
           >
             Sign up
           </button>
