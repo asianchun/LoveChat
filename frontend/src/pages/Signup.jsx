@@ -80,7 +80,9 @@ const Signup = () => {
                 disabled={loading}
                 placeholder="John"
                 value={firstName}
-                onChange={(e) => setFirstName(e.target.value)}
+                onChange={(e) =>
+                  setFirstName(e.target.value.replace(/[^a-zA-Z\s]+/g, ""))
+                }
                 className="bg-white border-black border shadow-sm rounded-md px-2 py-1.5 mb-2 font-palanquin focus:outline-none focus:border-green-300 focus:ring-1 focus:ring-green-300
               disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none"
               />
@@ -95,7 +97,9 @@ const Signup = () => {
                 disabled={loading}
                 placeholder="Smith"
                 value={lastName}
-                onChange={(e) => setLastName(e.target.value)}
+                onChange={(e) =>
+                  setLastName(e.target.value.replace(/[^a-zA-Z\s]+/g, ""))
+                }
                 className="bg-white border-black border shadow-sm rounded-md px-2 py-1.5 mb-2 font-palanquin focus:outline-none focus:border-green-300 focus:ring-1 focus:ring-green-300
               disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none"
               />
