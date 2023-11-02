@@ -73,11 +73,9 @@ const Signup = () => {
           )}
           <form>
             <div className="flex flex-col mb-4">
-              <label htmlFor="first-name">First Name</label>
+              <label className="font-palanquin">First Name</label>
               <input
                 type="text"
-                id="first-name"
-                name="first-name"
                 required
                 disabled={loading}
                 placeholder="John"
@@ -89,11 +87,9 @@ const Signup = () => {
               />
             </div>
             <div className="flex flex-col mb-4">
-              <label htmlFor="last-name">Last Name</label>
+              <label className="font-palanquin">Last Name</label>
               <input
                 type="text"
-                id="last-name"
-                name="last-name"
                 required
                 disabled={loading}
                 placeholder="Smith"
@@ -105,11 +101,9 @@ const Signup = () => {
               />
             </div>
             <div className="flex flex-col mb-4">
-              <label htmlFor="phone">Phone Number</label>
+              <label className="font-palanquin">Phone Number</label>
               <input
                 type="text"
-                id="phone"
-                name="phone"
                 maxLength="10"
                 required
                 disabled={loading}
@@ -122,11 +116,9 @@ const Signup = () => {
               />
             </div>
             <div className="flex flex-col mb-4">
-              <label htmlFor="email">Email</label>
+              <label className="font-palanquin">Email</label>
               <input
                 type="email"
-                id="email"
-                name="email"
                 required
                 disabled={loading}
                 placeholder="example@email.com"
@@ -136,11 +128,9 @@ const Signup = () => {
               />
             </div>
             <div className="flex flex-col mb-9 relative">
-              <label htmlFor="password">Password</label>
+              <label className="font-palanquin">Password</label>
               <input
                 type={showPassword ? "text" : "password"}
-                id="password"
-                name="password"
                 required
                 disabled={loading}
                 placeholder="********"

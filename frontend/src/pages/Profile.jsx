@@ -94,11 +94,9 @@ const Profile = () => {
               )}
               <form>
                 <div className="flex flex-col mb-4">
-                  <label htmlFor="first-name">First Name</label>
+                  <label className="font-palanquin">First Name</label>
                   <input
                     type="text"
-                    id="first-name"
-                    name="first-name"
                     required
                     disabled={loading}
                     placeholder="John"
@@ -110,11 +108,9 @@ const Profile = () => {
                   />
                 </div>
                 <div className="flex flex-col mb-4">
-                  <label htmlFor="last-name">Last Name</label>
+                  <label className="font-palanquin">Last Name</label>
                   <input
                     type="text"
-                    id="last-name"
-                    name="last-name"
                     required
                     disabled={loading}
                     placeholder="Smith"
@@ -126,11 +122,9 @@ const Profile = () => {
                   />
                 </div>
                 <div className="flex flex-col mb-9">
-                  <label htmlFor="phone">Phone Number</label>
+                  <label className="font-palanquin">Phone Number</label>
                   <input
                     type="text"
-                    id="phone"
-                    name="phone"
                     maxLength="10"
                     required
                     disabled={loading}

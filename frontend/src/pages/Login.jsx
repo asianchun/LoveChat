@@ -56,8 +56,6 @@ const Login = () => {
               <input
                 className="input"
                 type="email"
-                id="email"
-                name="email"
                 required
                 placeholder="Email"
                 disabled={loading}
@@ -68,8 +66,6 @@ const Login = () => {
               <input
                 className="input"
                 type={showPassword ? "text" : "password"}
-                id="password"
-                name="password"
                 disabled={loading}
                 required
                 placeholder="Password"
