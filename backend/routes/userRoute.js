@@ -78,4 +78,37 @@ router.post("/", async (req, res) => {
   }
 })
 
+//Update user profile
+router.put("/:id", async (req, res) => {
+  try {
+    if (!req.body.firstName || !req.body.lastName || !req.body.phoneNumber) {
+      return res.status(400).send({
+        message: "Send all required fields!",
+      })
+    }
+
+    const { id } = req.params
+    const result = await User.findByIdAndUpdate(
+      id,
+      {
+        $set: {
+          firstName: req.body.firstName,
+          lastName: req.body.lastName,
+          phoneNumber: req.body.phoneNumber,
+        },
+      },
+      { new: true }
+    )
+
+    if (!result) {
+      return res.status(404).json({ message: "User not found" })
+    }
+
+    return res.status(201).send(result)
+  } catch (error) {
+    console.log(error.message)
+    res.status(500).send({ message: error.message })
+  }
+})
+
 export default router

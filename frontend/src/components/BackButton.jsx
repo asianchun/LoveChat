@@ -1,5 +1,6 @@
 import React from "react"
 import { Link } from "react-router-dom"
+import { BsArrowLeft } from "react-icons/bs"
 
 //Pass a destination to the class, / is the default
 const BackButton = ({ destination = "/" }) => {
@@ -7,9 +8,9 @@ const BackButton = ({ destination = "/" }) => {
     <div className="flex">
       <Link
         to={destination}
-        className="bg-sky-800 text-white px-4 py-1 rounded-lg w-fit"
+        className="text-green-300 transform scale-100 hover:scale-150 transition-transform ease-in-out duration-200"
       >
-        Back
+        <BsArrowLeft />
       </Link>
     </div>
   )

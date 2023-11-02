@@ -11,6 +11,7 @@ const Login = () => {
   const { login } = useAuth()
   const navigate = useNavigate()
 
+  //Toggle show password
   const toggleShow = (e) => {
     e.preventDefault()
     setShowPassword(!showPassword)
@@ -44,8 +45,8 @@ const Login = () => {
           </p>
           {error && (
             <div
-              className="bg-red-200 border border-red-400 text-slate-600 font-semibold text-center mb-2 rounded-md py-3 hover:cursor-pointer"
-              onClick={() => setError(false)}
+              className="bg-red-200 border border-red-400 text-slate-600 font-montserrat font-semibold text-center mb-2 rounded-md py-3 hover:cursor-pointer"
+              onClick={() => setError("")}
             >
               Invalid email or password
             </div>
