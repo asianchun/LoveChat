@@ -2,6 +2,7 @@ import { useState } from "react"
 import { useAuth } from "../firebase/AuthContext"
 import { useNavigate } from "react-router-dom"
 import Snackbar from "../components/Snackbar"
+import InputBox from "../components/InputBox"
 
 const Login = () => {
   const [email, setEmail] = useState("")
@@ -52,24 +53,21 @@ const Login = () => {
             />
           )}
           <form>
-            <div className="flex flex-col mb-4">
-              <input
-                className="input"
-                type="email"
-                required
-                placeholder="Email"
-                disabled={loading}
-                onChange={(e) => setEmail(e.target.value)}
-              />
-            </div>
-            <div className="flex flex-col relative">
-              <input
-                className="input"
+            <InputBox
+              style="mb-4"
+              type="email"
+              placeholder="Email"
+              disabled={loading}
+              change={(e) => setEmail(e.target.value)}
+              value={email}
+            />
+            <div className="relative">
+              <InputBox
                 type={showPassword ? "text" : "password"}
-                disabled={loading}
-                required
                 placeholder="Password"
-                onChange={(e) => setPassword(e.target.value)}
+                disabled={loading}
+                change={(e) => setPassword(e.target.value)}
+                value={password}
               />
               <button
                 className="absolute right-2 top-[6px] slate text-green-400 font-palanquin disabled:text-slate-500"

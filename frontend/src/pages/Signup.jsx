@@ -3,6 +3,7 @@ import { useState } from "react"
 import { useAuth } from "../firebase/AuthContext"
 import axios from "axios"
 import Snackbar from "../components/Snackbar"
+import InputBox from "../components/InputBox"
 
 const Signup = () => {
   const [email, setEmail] = useState("")
@@ -72,71 +73,58 @@ const Signup = () => {
             />
           )}
           <form>
-            <div className="flex flex-col mb-4">
-              <label className="font-palanquin">First Name</label>
-              <input
-                type="text"
-                required
-                disabled={loading}
-                placeholder="John"
-                value={firstName}
-                onChange={(e) =>
-                  setFirstName(e.target.value.replace(/[^a-zA-Z\s]+/g, ""))
-                }
-                className="input"
-              />
-            </div>
-            <div className="flex flex-col mb-4">
-              <label className="font-palanquin">Last Name</label>
-              <input
-                type="text"
-                required
-                disabled={loading}
-                placeholder="Smith"
-                value={lastName}
-                onChange={(e) =>
-                  setLastName(e.target.value.replace(/[^a-zA-Z\s]+/g, ""))
-                }
-                className="input"
-              />
-            </div>
-            <div className="flex flex-col mb-4">
-              <label className="font-palanquin">Phone Number</label>
-              <input
-                type="text"
-                maxLength="10"
-                required
-                disabled={loading}
-                placeholder="0423353253"
-                value={phoneNumber}
-                onChange={(e) => {
-                  setPhone(e.target.value.replace(/[^0-9]/g, ""))
-                }}
-                className="input"
-              />
-            </div>
-            <div className="flex flex-col mb-4">
-              <label className="font-palanquin">Email</label>
-              <input
-                type="email"
-                required
-                disabled={loading}
-                placeholder="example@email.com"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                className="input"
-              />
-            </div>
-            <div className="flex flex-col mb-9 relative">
-              <label className="font-palanquin">Password</label>
-              <input
+            <InputBox
+              style="mb-4"
+              label="First Name"
+              type="text"
+              placeholder="John"
+              disabled={loading}
+              change={(e) =>
+                setFirstName(e.target.value.replace(/[^a-zA-Z\s]+/g, ""))
+              }
+              value={firstName}
+            />
+            <InputBox
+              style="mb-4"
+              label="Last Name"
+              type="text"
+              placeholder="Smith"
+              disabled={loading}
+              change={(e) =>
+                setLastName(e.target.value.replace(/[^a-zA-Z\s]+/g, ""))
+              }
+              value={lastName}
+            />
+            <InputBox
+              style="mb-4"
+              label="Phone Number"
+              type="text"
+              maxLength="10"
+              placeholder="0423353253"
+              disabled={loading}
+              change={(e) => {
+                setPhone(e.target.value.replace(/[^0-9]/g, ""))
+              }}
+              value={phoneNumber}
+            />
+            <InputBox
+              style="mb-4"
+              label="Email"
+              type="email"
+              placeholder="example@email.com"
+              disabled={loading}
+              change={(e) => setEmail(e.target.value)}
+              value={email}
+            />
+            <div className="relative">
+              <InputBox
+                style="mb-9"
+                label="Password"
                 type={showPassword ? "text" : "password"}
-                required
-                disabled={loading}
                 placeholder="********"
+                disabled={loading}
+                change={(e) => setPassword(e.target.value)}
                 value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                className="input"
               />
               <button
                 className="absolute right-2 top-[30px] slate text-green-400 font-palanquin disabled:text-slate-500"

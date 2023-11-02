@@ -4,6 +4,7 @@ import { useAuth } from "../firebase/AuthContext"
 import BackButton from "../components/BackButton"
 import Spinner from "../components/Spinner"
 import Snackbar from "../components/Snackbar"
+import InputBox from "../components/InputBox"
 
 const Profile = () => {
   const [firstName, setFirstName] = useState("")
@@ -93,49 +94,40 @@ const Profile = () => {
                 />
               )}
               <form>
-                <div className="flex flex-col mb-4">
-                  <label className="font-palanquin">First Name</label>
-                  <input
-                    type="text"
-                    required
-                    disabled={loading}
-                    placeholder="John"
-                    value={firstName}
-                    onChange={(e) =>
-                      setFirstName(e.target.value.replace(/[^a-zA-Z\s]+/g, ""))
-                    }
-                    className="input"
-                  />
-                </div>
-                <div className="flex flex-col mb-4">
-                  <label className="font-palanquin">Last Name</label>
-                  <input
-                    type="text"
-                    required
-                    disabled={loading}
-                    placeholder="Smith"
-                    value={lastName}
-                    onChange={(e) =>
-                      setLastName(e.target.value.replace(/[^a-zA-Z\s]+/g, ""))
-                    }
-                    className="input"
-                  />
-                </div>
-                <div className="flex flex-col mb-9">
-                  <label className="font-palanquin">Phone Number</label>
-                  <input
-                    type="text"
-                    maxLength="10"
-                    required
-                    disabled={loading}
-                    placeholder="0423353253"
-                    value={phoneNumber}
-                    onChange={(e) => {
-                      setPhone(e.target.value.replace(/[^0-9]/g, ""))
-                    }}
-                    className="input"
-                  />
-                </div>
+                <InputBox
+                  style="mb-4"
+                  label="First Name"
+                  type="text"
+                  placeholder="John"
+                  disabled={loading}
+                  change={(e) =>
+                    setFirstName(e.target.value.replace(/[^a-zA-Z\s]+/g, ""))
+                  }
+                  value={firstName}
+                />
+                <InputBox
+                  style="mb-4"
+                  label="Last Name"
+                  type="text"
+                  placeholder="Smith"
+                  disabled={loading}
+                  change={(e) =>
+                    setLastName(e.target.value.replace(/[^a-zA-Z\s]+/g, ""))
+                  }
+                  value={lastName}
+                />
+                <InputBox
+                  style="mb-9"
+                  label="Phone Number"
+                  type="text"
+                  maxLength="10"
+                  placeholder="0423353253"
+                  disabled={loading}
+                  change={(e) => {
+                    setPhone(e.target.value.replace(/[^0-9]/g, ""))
+                  }}
+                  value={phoneNumber}
+                />
                 <div className="text-center mb-2">
                   <button
                     onClick={handleClick}

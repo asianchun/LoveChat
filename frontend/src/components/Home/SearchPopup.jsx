@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 import axios from "axios"
-import { useAuth } from "../firebase/AuthContext"
+import { useAuth } from "../../firebase/AuthContext"
 
 const SearchPopup = ({ update }) => {
   const [search, setSearch] = useState("")

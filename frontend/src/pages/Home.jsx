@@ -5,7 +5,7 @@ import axios from "axios"
 import Spinner from "../components/Spinner"
 import Conversations from "../components/Home/Conversations"
 import ChatBox from "../components/Home/Chatbox"
-import SearchPopup from "../components/SearchPopup"
+import SearchPopup from "../components/Home/SearchPopup"
 import { io } from "socket.io-client"
 
 const Home = () => {
