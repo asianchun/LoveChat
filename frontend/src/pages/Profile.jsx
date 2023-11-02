@@ -76,7 +76,9 @@ const Profile = () => {
           <>
             <h2 className="flex items-center justify-between text-3xl font-semibold font-montserrat mb-5 w-[370px]">
               <BackButton />
-              Hey, {fullName}!
+              <span>
+                <span className="text-green-300">Hey,</span> {fullName}!
+              </span>
             </h2>
             <div className="px-7 py-5 border rounded-xl w-[370px] shadow-xl">
               {error && (
