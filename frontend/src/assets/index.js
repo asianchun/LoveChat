@@ -1,3 +1,4 @@
 import logo from "./LoveChat.png"
+import footerLogo from "./footer.png"
 
-export { logo }
+export { logo, footerLogo }

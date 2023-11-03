@@ -74,13 +74,13 @@ const Profile = () => {
       <div className="flex flex-col items-center justify-center h-screen w-screen">
         {fullName !== "" ? (
           <>
-            <h2 className="flex items-center justify-between text-3xl font-semibold font-montserrat mb-5 w-[370px]">
+            <h2 className="flex items-center justify-between text-3xl font-semibold font-montserrat mb-5 w-[400px] max-sm:w-[350px]">
               <BackButton />
               <span>
                 <span className="text-green-300">Hey,</span> {fullName}!
               </span>
             </h2>
-            <div className="p-10 border rounded-xl w-[400px] shadow-xl mx-5">
+            <div className="p-10 sm:border rounded-xl w-[400px] sm:shadow-xl mx-5">
               {error && (
                 <Snackbar
                   type="error"
