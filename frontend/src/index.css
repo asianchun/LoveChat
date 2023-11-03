@@ -31,4 +31,8 @@
   .btn-white {
     @apply border-black text-slate-500 hover:bg-slate-200;
   }
+
+  .footer-link {
+    @apply hover:text-pink px-6;
+  }
 }
