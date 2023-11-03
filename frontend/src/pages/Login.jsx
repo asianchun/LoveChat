@@ -39,67 +39,63 @@ const Login = () => {
   }
 
   return (
-    <main className="relative">
-      <div className="flex items-center justify-center h-screen w-screen">
-        <div className="p-10 sm:border rounded-xl w-[400px] sm:shadow-xl mx-5">
-          <h2 className="text-3xl font-semibold font-montserrat">Sign In</h2>
-          <p className="mb-7 font-montserrat">
-            Continue your connection journey
-          </p>
-          {error && (
-            <Snackbar
-              type="error"
-              action={() => setError("")}
-              text="Invalid email or password"
-            />
-          )}
-          <form>
+    <div className="flex items-center justify-center h-screen w-screen">
+      <div className="p-10 sm:border rounded-xl w-[400px] sm:shadow-xl mx-5">
+        <h2 className="text-3xl font-semibold font-montserrat">Sign In</h2>
+        <p className="mb-7 font-montserrat">Continue your connection journey</p>
+        {error && (
+          <Snackbar
+            type="error"
+            action={() => setError("")}
+            text="Invalid email or password"
+          />
+        )}
+        <form>
+          <InputBox
+            style="mb-4"
+            type="email"
+            placeholder="Email"
+            disabled={loading}
+            change={(e) => setEmail(e.target.value)}
+            value={email}
+          />
+          <div className="relative">
             <InputBox
-              style="mb-4"
-              type="email"
-              placeholder="Email"
+              type={showPassword ? "text" : "password"}
+              placeholder="Password"
               disabled={loading}
-              change={(e) => setEmail(e.target.value)}
-              value={email}
+              change={(e) => setPassword(e.target.value)}
+              value={password}
             />
-            <div className="relative">
-              <InputBox
-                type={showPassword ? "text" : "password"}
-                placeholder="Password"
-                disabled={loading}
-                change={(e) => setPassword(e.target.value)}
-                value={password}
-              />
-              <button
-                className="absolute right-2 top-[6px] slate text-green-400 font-palanquin disabled:text-slate-500"
-                onClick={toggleShow}
-                disabled={loading}
-              >
-                {showPassword ? "hide" : "show"}
-              </button>
-            </div>
-            <div className="mt-9 text-center mb-4">
-              <button
-                onClick={handleClick}
-                disabled={loading}
-                className="button btn-green"
-              >
-                Login
-              </button>
-            </div>
-          </form>
-          <div className="text-center">
             <button
-              onClick={() => navigate("/signup")}
+              className="absolute right-2 top-[6px] slate text-green-400 font-palanquin disabled:text-slate-500"
+              onClick={toggleShow}
               disabled={loading}
-              className="button btn-white mb-2"
             >
-              Sign up
+              {showPassword ? "hide" : "show"}
             </button>
           </div>
+          <div className="mt-9 text-center mb-4">
+            <button
+              onClick={handleClick}
+              disabled={loading}
+              className="button btn-green"
+            >
+              Login
+            </button>
+          </div>
+        </form>
+        <div className="text-center">
+          <button
+            onClick={() => navigate("/signup")}
+            disabled={loading}
+            className="button btn-white mb-2"
+          >
+            Sign up
+          </button>
         </div>
       </div>
-    </main>
+    </div>
   )
 }
 

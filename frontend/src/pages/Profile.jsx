@@ -70,83 +70,81 @@ const Profile = () => {
   }, [user])
 
   return (
-    <main className="relative">
-      <div className="flex flex-col items-center justify-center h-screen w-screen">
-        {fullName !== "" ? (
-          <>
-            <h2 className="flex items-center justify-between text-3xl font-semibold font-montserrat mb-5 w-[400px] max-sm:w-[350px]">
-              <BackButton />
-              <span>
-                <span className="text-green-300">Hey,</span> {fullName}!
-              </span>
-            </h2>
-            <div className="p-10 sm:border rounded-xl w-[400px] sm:shadow-xl mx-5">
-              {error && (
-                <Snackbar
-                  type="error"
-                  action={() => setError("")}
-                  text="Something went wrong"
-                />
-              )}
-              {success && (
-                <Snackbar
-                  type="success"
-                  action={() => setSuccess("")}
-                  text={`${success}!`}
-                />
-              )}
-              <form>
-                <InputBox
-                  style="mb-4"
-                  label="First Name"
-                  type="text"
-                  placeholder="John"
+    <div className="flex flex-col items-center justify-center h-screen w-screen">
+      {fullName !== "" ? (
+        <>
+          <h2 className="flex items-center justify-between text-3xl font-semibold font-montserrat mb-5 w-[400px] max-sm:w-[350px]">
+            <BackButton />
+            <span>
+              <span className="text-green-300">Hey,</span> {fullName}!
+            </span>
+          </h2>
+          <div className="p-10 sm:border rounded-xl w-[400px] sm:shadow-xl mx-5">
+            {error && (
+              <Snackbar
+                type="error"
+                action={() => setError("")}
+                text="Something went wrong"
+              />
+            )}
+            {success && (
+              <Snackbar
+                type="success"
+                action={() => setSuccess("")}
+                text={`${success}!`}
+              />
+            )}
+            <form>
+              <InputBox
+                style="mb-4"
+                label="First Name"
+                type="text"
+                placeholder="John"
+                disabled={loading}
+                change={(e) =>
+                  setFirstName(e.target.value.replace(/[^a-zA-Z\s]+/g, ""))
+                }
+                value={firstName}
+              />
+              <InputBox
+                style="mb-4"
+                label="Last Name"
+                type="text"
+                placeholder="Smith"
+                disabled={loading}
+                change={(e) =>
+                  setLastName(e.target.value.replace(/[^a-zA-Z\s]+/g, ""))
+                }
+                value={lastName}
+              />
+              <InputBox
+                style="mb-9"
+                label="Phone Number"
+                type="text"
+                maxLength="10"
+                placeholder="0423353253"
+                disabled={loading}
+                change={(e) => {
+                  setPhone(e.target.value.replace(/[^0-9]/g, ""))
+                }}
+                value={phoneNumber}
+              />
+              <div className="text-center mb-2">
+                <button
+                  onClick={handleClick}
                   disabled={loading}
-                  change={(e) =>
-                    setFirstName(e.target.value.replace(/[^a-zA-Z\s]+/g, ""))
-                  }
-                  value={firstName}
-                />
-                <InputBox
-                  style="mb-4"
-                  label="Last Name"
-                  type="text"
-                  placeholder="Smith"
-                  disabled={loading}
-                  change={(e) =>
-                    setLastName(e.target.value.replace(/[^a-zA-Z\s]+/g, ""))
-                  }
-                  value={lastName}
-                />
-                <InputBox
-                  style="mb-9"
-                  label="Phone Number"
-                  type="text"
-                  maxLength="10"
-                  placeholder="0423353253"
-                  disabled={loading}
-                  change={(e) => {
-                    setPhone(e.target.value.replace(/[^0-9]/g, ""))
-                  }}
-                  value={phoneNumber}
-                />
-                <div className="text-center mb-2">
-                  <button
-                    onClick={handleClick}
-                    disabled={loading}
-                    className="button btn-green"
-                  >
-                    Save
-                  </button>
-                </div>
-              </form>
-            </div>
-          </>
-        ) : (
-          <Spinner />
-        )}
-      </div>
-    </main>
+                  className="button btn-green"
+                >
+                  Save
+                </button>
+              </div>
+            </form>
+          </div>
+        </>
+      ) : (
+        <Spinner />
+      )}
+    </div>
   )
 }
 

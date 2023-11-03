@@ -12,16 +12,18 @@ import Footer from "./components/Footer"
 const App = () => {
   return (
     <AuthProvider>
-      <TopBar />
-      <Routes>
-        <Route element={<PrivateRoute />}>
-          <Route path="/" element={<Home />} />
-          <Route path="/profile" element={<Profile />} />
-        </Route>
-        <Route path="/signup" element={<Signup />} />
-        <Route path="/login" element={<Login />} />
-      </Routes>
-      <Footer />
+      <main className="relative">
+        <TopBar />
+        <Routes>
+          <Route element={<PrivateRoute />}>
+            <Route path="/" element={<Home />} />
+            <Route path="/profile" element={<Profile />} />
+          </Route>
+          <Route path="/signup" element={<Signup />} />
+          <Route path="/login" element={<Login />} />
+        </Routes>
+        <Footer />
+      </main>
     </AuthProvider>
   )
 }
