@@ -39,7 +39,7 @@ const Login = () => {
   }
 
   return (
-    <div className="flex items-center justify-center h-screen w-screen">
+    <div className="main-container">
       <div className="p-10 sm:border rounded-xl w-[400px] sm:shadow-xl mx-5">
         <h2 className="text-3xl font-semibold font-montserrat">Sign In</h2>
         <p className="mb-7 font-montserrat">Continue your connection journey</p>

@@ -70,7 +70,7 @@ const Profile = () => {
   }, [user])
 
   return (
-    <div className="flex flex-col items-center justify-center h-screen w-screen">
+    <div className="main-container">
       {fullName !== "" ? (
         <>
           <h2 className="flex items-center justify-between text-3xl font-semibold font-montserrat mb-5 w-[400px] max-sm:w-[350px]">

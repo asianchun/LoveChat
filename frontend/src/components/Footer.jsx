@@ -12,10 +12,10 @@ const Footer = () => {
       </div>
       <ul className="font-palanquin grid grid-cols-6 gap-2 mb-6 max-sm:mb-2 text-center max-sm:grid-cols-2 max-lg:grid-cols-3">
         <li className="footer-link">
-          <a href="www.google.com.au">About</a>
+          <a href="#">About</a>
         </li>
         <li className="footer-link">
-          <a href="www.google.com.au">Accessibility</a>
+          <a href="#">Accessibility</a>
         </li>
         <li className="footer-link">
           <a href="#">Privacy Policy</a>

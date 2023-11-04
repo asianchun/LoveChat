@@ -59,8 +59,8 @@ const Signup = () => {
   }
 
   return (
-    <div className="flex flex-col items-center justify-center h-screen w-screen text-center">
-      <h2 className="text-3xl font-semibold font-montserrat max-sm:mb-0 mb-5">
+    <div className="main-container">
+      <h2 className="text-3xl font-semibold font-montserrat max-sm:mb-0 mb-5 text-center">
         Create the best connections
       </h2>
       <div className="p-10 sm:border rounded-xl w-[400px] sm:shadow-xl mx-5">
