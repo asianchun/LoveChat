@@ -30,7 +30,7 @@ const TopBar = () => {
           className="flex justify-center items-center hover:cursor-pointer"
           onClick={() => navigate("/")}
         >
-          <img src={logo} alt="logo" width={125} height={125} />
+          <img src={logo} alt="logo" width={100} height={100} />
         </div>
         {currentUser ? (
           <>

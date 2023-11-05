@@ -5,7 +5,7 @@ const Footer = () => {
   return (
     <footer className="absolute bottom-0 w-full">
       <ul className="font-palanquin grid grid-cols-6 gap-2 auto-rows-fr text-center mb-3 max-lg:mb-1 max-sm:grid-cols-2 max-lg:grid-cols-3 justify-center items-center">
-        <li className="footer-link">
+        <li className="px-6">
           <div className="flex gap-7 items-center justify-center">
             <img src={footerLogo} alt="logo" width={30} height={30} />
             <span className="flex justify-center items-center relative right-6">
