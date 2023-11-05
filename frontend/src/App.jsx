@@ -12,7 +12,7 @@ import Footer from "./components/Footer"
 const App = () => {
   return (
     <AuthProvider>
-      <main className="relative min-h-[775px] max-h-[800px] h-screen w-screen min-w-[375px]">
+      <main className="relative min-h-[775px] max-sm:min-h-[900px] max-h-[1200px] h-screen w-screen">
         <TopBar />
         <Routes>
           <Route element={<PrivateRoute />}>
