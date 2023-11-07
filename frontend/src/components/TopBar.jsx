@@ -3,6 +3,7 @@ import { useAuth } from "../firebase/AuthContext"
 import { Link, useNavigate } from "react-router-dom"
 import { logo } from "../assets"
 import { RxHamburgerMenu } from "react-icons/rx"
+import { AiOutlineClose } from "react-icons/ai"
 
 const TopBar = () => {
   const [navOpen, setNavOpen] = useState(false)
@@ -11,6 +12,10 @@ const TopBar = () => {
 
   const toggleNav = () => {
     setNavOpen(!navOpen)
+  }
+
+  const closeNav = () => {
+    setNavOpen(false)
   }
 
   //Logout the user
@@ -24,32 +29,43 @@ const TopBar = () => {
   }
 
   return (
-    <header className="sm:px-16 px-8 py-2 w-full absolute z-10">
-      <nav className="flex items-center justify-between font-montserrat">
-        <div
-          className="flex justify-center items-center hover:cursor-pointer"
-          onClick={() => navigate("/")}
-        >
+    <header className="w-full fixed py-2 sm:px-16 px-8">
+      <nav className="flex justify-between items-center w-full mx-auto font-montserrat">
+        <div onClick={() => navigate("/")} className="hover:cursor-pointer">
           <img src={logo} alt="logo" width={100} height={100} />
         </div>
-        {currentUser ? (
+        {currentUser && (
           <>
-            <div className="flex gap-10 items-center justify-center max-lg:hidden">
-              <Link to="/profile" className="hover:text-green-300">
-                My Profile
-              </Link>
-              <button onClick={logoutUser} className="hover:text-green-300">
-                Log Out
-              </button>
-            </div>
-            <div
-              className="hidden max-lg:block hover:cursor-pointer hover:text-green-300"
-              onClick={toggleNav}
+            <ul
+              className={`${
+                navOpen ? "top-[90%]" : "top-[-1000%]"
+              } duration-500 md:static absolute max-md:shadow-xl bg-white md:min-h-fit min-h-[20vh] left-0 md:w-auto w-full flex px-5 md:flex-row flex-col items-start justify-center md:items-center md:gap-[4vw] gap-3`}
             >
-              <RxHamburgerMenu size={32} />
+              <li onClick={closeNav}>
+                <Link to="/profile" className="hover:text-green-300">
+                  My Profile
+                </Link>
+              </li>
+              <li onClick={closeNav}>
+                <button className="hover:text-green-300" onClick={logoutUser}>
+                  Log Out
+                </button>
+              </li>
+            </ul>
+            <div className="flex items-center gap-6 md:hidden">
+              <div
+                className="hover:cursor-pointer hover:text-green-300"
+                onClick={toggleNav}
+              >
+                {navOpen ? (
+                  <AiOutlineClose size={32} />
+                ) : (
+                  <RxHamburgerMenu size={32} />
+                )}
+              </div>
             </div>
           </>
-        ) : null}
+        )}
       </nav>
     </header>
   )
