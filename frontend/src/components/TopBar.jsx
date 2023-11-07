@@ -29,7 +29,7 @@ const TopBar = () => {
   }
 
   return (
-    <header className="w-full fixed py-2 sm:px-16 px-8">
+    <header className="w-full fixed py-2 sm:px-16 px-8 z-10">
       <nav className="flex justify-between items-center w-full mx-auto font-montserrat">
         <div onClick={() => navigate("/")} className="hover:cursor-pointer">
           <img src={logo} alt="logo" width={100} height={100} />
@@ -38,8 +38,8 @@ const TopBar = () => {
           <>
             <ul
               className={`${
-                navOpen ? "top-[90%]" : "top-[-1000%]"
-              } duration-500 md:static absolute max-md:shadow-xl bg-white md:min-h-fit min-h-[20vh] left-0 md:w-auto w-full flex px-5 md:flex-row flex-col items-start justify-center md:items-center md:gap-[4vw] gap-3`}
+                navOpen ? "left-[0%]" : "left-[-100%]"
+              } duration-500 md:static absolute max-md:shadow-xl max-md:ring-1 rounded-tr-xl rounded-br-lg max-md:ring-pink top-[90%] bg-white md:min-h-fit min-h-screen left-0 md:w-auto w-[35%] flex px-5 py-5 md:flex-row flex-col items-center md:gap-[4vw] gap-3`}
             >
               <li onClick={closeNav}>
                 <Link to="/profile" className="hover:text-green-300">
