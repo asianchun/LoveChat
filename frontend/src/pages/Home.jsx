@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react"
-import { Link, useNavigate } from "react-router-dom"
 import { useAuth } from "../firebase/AuthContext"
 import axios from "axios"
 import Spinner from "../components/Spinner"
@@ -12,18 +11,34 @@ const Home = () => {
   const [loading, setLoading] = useState(false)
   const [conversations, setConversations] = useState([])
   const [currentConversation, setCurrentConversation] = useState(null)
-  const { currentUser, logout } = useAuth()
+  const { currentUser } = useAuth()
   const [socket, setSocket] = useState(null)
-  const navigate = useNavigate()
 
   //Update the current conversation
   const setConversationMessages = (conversation) => {
     setCurrentConversation(conversation)
   }
 
+  const deleteConversation = async (id) => {
+    try {
+      await axios.delete(`http://localhost:5555/conversations/${id}`)
+
+      const newConversations = conversations.filter(
+        (conversation) => conversation._id !== id
+      )
+
+      setConversations(newConversations)
+      setCurrentConversation(newConversations[0])
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
   //Add a new conversation if it doesn't exist
   //Open the selected conversation
   const addConversation = (conversation) => {
+    setCurrentConversation(conversation)
+
     const isExistingConversation = conversations.some(
       (convo) => convo._id === conversation._id
     )
@@ -31,8 +46,6 @@ const Home = () => {
     if (!isExistingConversation) {
       setConversations([...conversations, conversation])
     }
-
-    setCurrentConversation(conversation)
   }
 
   //Update the conversation in the list of all conversations
@@ -79,9 +92,7 @@ const Home = () => {
       .get(`http://localhost:5555/conversations/${currentUser.uid}`)
       .then((response) => {
         setConversations(response.data.data)
-        setCurrentConversation(
-          response.data.data[response.data.data.length - 1]
-        )
+        setCurrentConversation(response.data.data[0])
         setLoading(false)
       })
       .catch((error) => {
@@ -97,20 +108,22 @@ const Home = () => {
 
   return (
     <div className="main-container">
-      <div className="grid grid-cols-3 rounded-xl max-w-[1400px] w-full max-h-[480px] h-full lg:border lg:shadow-xl p-10 mx-5">
+      <div className="grid grid-cols-5 rounded-xl max-w-[1400px] w-full max-h-[480px] h-full lg:border lg:shadow-xl p-10 mx-5">
         <section>
-          <SearchPopup update={addConversation} />
-          <div className="uppercase font-palanquin mt-2 mb-1">
-            Direct messages
+          <SearchPopup addConversation={addConversation} />
+          <div className="font-palanquin mt-2 mb-1">
+            <h2 className="uppercase mb-2 font-semibold">Direct messages</h2>
+            {loading ? (
+              <Spinner />
+            ) : (
+              <Conversations
+                currentConversation={currentConversation}
+                conversations={conversations}
+                selectConversation={setConversationMessages}
+                deleteConversation={deleteConversation}
+              />
+            )}
           </div>
-          {loading ? (
-            <Spinner />
-          ) : (
-            <Conversations
-              conversations={conversations}
-              onHandleClick={setConversationMessages}
-            />
-          )}
         </section>
         <ChatBox
           conversation={currentConversation}

@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react"
 import axios from "axios"
 import { useAuth } from "../../firebase/AuthContext"
+import { AiOutlineSearch } from "react-icons/ai"
 
-const SearchPopup = ({ update }) => {
+const SearchPopup = ({ addConversation }) => {
   const [search, setSearch] = useState("")
   const [users, setUsers] = useState([])
   const [selectedUser, setSelectedUser] = useState(null)
@@ -10,7 +11,7 @@ const SearchPopup = ({ update }) => {
   const [showModal, setShowModal] = useState(false)
   const { currentUser } = useAuth()
 
-  const closeModal = (event) => {
+  const closeModal = () => {
     setShowModal(false)
     setSearch("")
   }
@@ -35,7 +36,10 @@ const SearchPopup = ({ update }) => {
           const name =
             user.firstName.toLowerCase() + " " + user.lastName.toLowerCase()
 
-          return user.email.includes(search) || name.includes(search)
+          return (
+            user.email.includes(search.toLowerCase()) ||
+            name.includes(search.toLowerCase())
+          )
         })
       )
     }
@@ -62,7 +66,7 @@ const SearchPopup = ({ update }) => {
                 axios
                   .post("http://localhost:5555/conversations", data)
                   .then((response) => {
-                    update(response.data)
+                    addConversation(response.data)
                   })
                   .catch((error) => {
                     console.log(error)
@@ -72,7 +76,7 @@ const SearchPopup = ({ update }) => {
                 console.log(error)
               })
           } else {
-            update(res.data.data[0])
+            addConversation(res.data.data[0])
           }
         })
         .catch((error) => {
@@ -85,13 +89,13 @@ const SearchPopup = ({ update }) => {
   }, [selectedUser])
 
   return (
-    <>
+    <div>
       <button
-        className=" text-black active:bg-pink-600 font-bold text-sm border border-pink p-1 pl-2 pr-7 rounded-md shadow-lg outline-none focus:outline-none ease-linear transition-all duration-150 transform scale-100 hover:scale-105"
+        className=" text-black active:bg-pink-600 w-full font-bold text-sm border border-pink py-1 px-2 rounded-md shadow-lg outline-none focus:outline-none ease-linear transition-all duration-150 transform"
         type="button"
         onClick={() => setShowModal(true)}
       >
-        Find or start a conversation
+        <AiOutlineSearch />
       </button>
       <div
         onClick={closeModal}
@@ -117,7 +121,7 @@ const SearchPopup = ({ update }) => {
               {filteredUsers.length === 0 && "No users found"}
             </h3>
           )}
-          <div className="max-h-[224px] overflow-y-scroll scrollbar">
+          <div className="max-h-[224px] overflow-y-scroll scrollbar scrollbar-8">
             {filteredUsers.map((user) => (
               <div
                 key={user._id}
@@ -135,7 +139,7 @@ const SearchPopup = ({ update }) => {
           </div>
         </div>
       </div>
-    </>
+    </div>
   )
 }
 

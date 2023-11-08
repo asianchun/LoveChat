@@ -40,7 +40,12 @@
     @apply flex flex-col items-center justify-center h-full w-full overflow-auto;
   }
 
-  .scrollbar::-webkit-scrollbar {
+  .scrollbar-4::-webkit-scrollbar {
+    width: 4px;
+    height: 10px;
+  }
+
+  .scrollbar-8::-webkit-scrollbar {
     width: 8px;
     height: 10px;
   }
