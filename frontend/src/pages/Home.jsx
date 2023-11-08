@@ -127,7 +127,7 @@ const Home = () => {
 
   return (
     <div className="main-container">
-      <div className="grid grid-cols-5 rounded-xl max-w-[1400px] w-full max-h-[480px] h-full lg:border lg:shadow-xl p-10 mx-5">
+      <div className="grid grid-cols-5 rounded-xl max-w-[1400px] w-full max-h-[480px] h-full lg:border lg:shadow-xl p-7 mx-5">
         <section>
           <SearchPopup addConversation={addConversation} />
           <div className="font-palanquin mt-2 mb-1">

@@ -10,7 +10,7 @@ const InputBox = ({
 }) => {
   return (
     <div className={`flex flex-col ${style}`}>
-      {label ?? <label className="font-palanquin">{label}</label>}
+      {label && <label className="font-palanquin">{label}</label>}
       <input
         className="input"
         type={type}
