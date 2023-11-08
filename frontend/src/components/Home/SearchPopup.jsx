@@ -124,7 +124,7 @@ const SearchPopup = ({ update }) => {
                 onClick={() => {
                   setSelectedUser(user)
                 }}
-                className="hover:cursor-pointer hover:bg-slate-200 rounded-md px-4 py-1 flex gap-2 items-center"
+                className="hover:cursor-pointer hover:bg-slate-200 rounded-md px-4 py-1 flex gap-2 items-center mr-1"
               >
                 <h1 className="font-[400]">
                   {user.firstName} {user.lastName}
