@@ -122,12 +122,12 @@ const ChatBox = ({ conversation, update, socket }) => {
               )}
             </div>
           </div>
-          {loading && <Spinner />}
           <div className="relative">
             <input
               type="text"
               placeholder="Type a Message"
               value={text}
+              disabled={loading}
               onChange={(e) => setText(e.target.value)}
               onKeyDown={(e) => {
                 if (e.key === "Enter") {
@@ -139,6 +139,7 @@ const ChatBox = ({ conversation, update, socket }) => {
             <button
               className="absolute right-2 top-[6px] slate text-green-400 font-palanquin disabled:text-slate-500 hover:text-pink"
               onClick={sendMessage}
+              disabled={loading}
             >
               <IoMdSend size={25} />
             </button>
