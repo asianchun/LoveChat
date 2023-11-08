@@ -39,7 +39,7 @@ const TopBar = () => {
             <ul
               className={`${
                 navOpen ? "left-[0%]" : "left-[-100%]"
-              } duration-500 md:static absolute max-md:shadow-xl max-md:ring-1 rounded-tr-xl rounded-br-lg max-md:ring-pink top-[90%] bg-white md:min-h-fit min-h-screen left-0 md:w-auto w-[35%] flex px-5 py-5 md:flex-row flex-col items-center md:gap-[4vw] gap-3`}
+              } duration-500 md:static absolute max-md:shadow-xl max-md:ring-1 rounded-tr-xl rounded-br-lg max-md:ring-pink top-[90%] max-md:bg-white md:min-h-fit min-h-screen left-0 md:w-auto w-[35%] flex px-5 py-5 md:flex-row flex-col items-center md:gap-[4vw] gap-3`}
             >
               <li onClick={closeNav}>
                 <Link to="/profile" className="hover:text-green-300">

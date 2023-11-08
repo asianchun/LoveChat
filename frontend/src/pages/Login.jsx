@@ -3,7 +3,6 @@ import { useAuth } from "../firebase/AuthContext"
 import { useNavigate } from "react-router-dom"
 import Snackbar from "../components/Snackbar"
 import InputBox from "../components/InputBox"
-import TopBar from "../components/TopBar"
 
 const Login = () => {
   const [email, setEmail] = useState("")

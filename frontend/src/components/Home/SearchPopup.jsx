@@ -32,7 +32,10 @@ const SearchPopup = ({ update }) => {
     } else {
       setFilteredUsers(
         users.filter((user) => {
-          return user.email.includes(search)
+          const name =
+            user.firstName.toLowerCase() + " " + user.lastName.toLowerCase()
+
+          return user.email.includes(search) || name.includes(search)
         })
       )
     }
@@ -84,45 +87,52 @@ const SearchPopup = ({ update }) => {
   return (
     <>
       <button
-        className="bg-pink-500 text-white active:bg-pink-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+        className=" text-black active:bg-pink-600 font-bold text-sm border border-pink p-1 pl-2 pr-7 rounded-md shadow-lg outline-none focus:outline-none ease-linear transition-all duration-150 transform scale-100 hover:scale-105"
         type="button"
         onClick={() => setShowModal(true)}
       >
-        Add conversation
+        Find or start a conversation
       </button>
       <div
         onClick={closeModal}
-        className={`fixed inset-0 flex justify-center items-center transition-colors ${
+        className={`fixed inset-0 flex justify-center items-start transition-colors ${
           showModal ? "visible bg-black/20" : "invisible"
         }`}
       >
         <div
           onClick={(e) => e.stopPropagation()}
-          className={`bg-white rounded-xl shadow p-6 transition-all ${
+          className={`bg-white w-[450px] rounded-xl shadow p-4 relative top-[20%] transition-all font-montserrat ${
             showModal ? "scale-100 opacity-100" : "scale-125 opacity-0"
           }`}
         >
-          <div className="flex items-start justify-between p-5 border-b border-solid border-blueGray-200 rounded-t">
-            <input
-              type="text"
-              placeholder="Search for user"
-              value={search}
-              onChange={(e) => setSearch(e.target.value)}
-            />
+          <input
+            type="text"
+            placeholder="Search for users"
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+            className="px-4 py-3 text-xl outline-none rounded-xl bg-slate-200 w-full"
+          />
+          {search !== "" && (
+            <h3 className="pl-4 mt-6 mb-2 text-sm uppercase">
+              {filteredUsers.length === 0 && "No users found"}
+            </h3>
+          )}
+          <div className="max-h-[224px] overflow-y-scroll scrollbar">
+            {filteredUsers.map((user) => (
+              <div
+                key={user._id}
+                onClick={() => {
+                  setSelectedUser(user)
+                }}
+                className="hover:cursor-pointer hover:bg-slate-200 rounded-md px-4 py-1 flex gap-2 items-center"
+              >
+                <h1 className="font-[400]">
+                  {user.firstName} {user.lastName}
+                </h1>
+                <p className="text-slate-400 text-[13px]">{user.email}</p>
+              </div>
+            ))}
           </div>
-          {filteredUsers.map((user) => (
-            <div
-              key={user._id}
-              onClick={() => {
-                setSelectedUser(user)
-              }}
-            >
-              <h1>
-                {user.firstName} {user.lastName}
-              </h1>
-              <p>{user.email}</p>
-            </div>
-          ))}
         </div>
       </div>
     </>

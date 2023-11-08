@@ -61,7 +61,7 @@ const ChatBox = ({ conversation, update, socket }) => {
   }
 
   return (
-    <section>
+    <section className="col-span-2">
       <div>The chat</div>
       {messages.length === 0 ? (
         <div>No messages</div>

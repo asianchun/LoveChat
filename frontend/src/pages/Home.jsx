@@ -97,10 +97,12 @@ const Home = () => {
 
   return (
     <div className="main-container">
-      <div className="grid grid-cols-2 rounded-xl max-w-[1400px] w-full max-h-[480px] h-full lg:border lg:shadow-xl p-10 mx-5">
+      <div className="grid grid-cols-3 rounded-xl max-w-[1400px] w-full max-h-[480px] h-full lg:border lg:shadow-xl p-10 mx-5">
         <section>
           <SearchPopup update={addConversation} />
-          <div>All conversations</div>
+          <div className="uppercase font-palanquin mt-2 mb-1">
+            Direct messages
+          </div>
           {loading ? (
             <Spinner />
           ) : (
