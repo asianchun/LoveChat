@@ -117,9 +117,10 @@ const Home = () => {
         return dateB - dateA
       })
 
+      setCurrentConversation(filter[0])
+
       if (filter[0]._id !== conversations[0]._id) {
         setConversations(filter)
-        setCurrentConversation(filter[0])
       }
     }
   }, [conversations])

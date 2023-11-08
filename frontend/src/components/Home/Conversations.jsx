@@ -17,8 +17,8 @@ const Conversations = ({
 
   return (
     <div className="max-h-[360px] overflow-y-scroll hover:scrollbar hover:scrollbar-4">
-      {conversations.length === 0 ? (
-        <span>Add more conversations by clicking the + button</span>
+      {!focused ? (
+        <p className="px-2">Add conversations above</p>
       ) : (
         conversations.map((conversation) => (
           <div
