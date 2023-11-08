@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react"
 import { useAuth } from "../../firebase/AuthContext"
 import axios from "axios"
-import Spinner from "../Spinner"
 import { IoMdSend } from "react-icons/io"
 
 const ChatBox = ({ conversation, update, socket }) => {
