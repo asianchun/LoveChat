@@ -99,7 +99,7 @@ const SearchPopup = ({ addConversation }) => {
       </button>
       <div
         onClick={closeModal}
-        className={`fixed inset-0 flex justify-center items-start transition-colors ${
+        className={`fixed inset-0 flex justify-center items-start transition-colors z-20 ${
           showModal ? "visible bg-black/20" : "invisible"
         }`}
       >

@@ -45,6 +45,11 @@
     height: 10px;
   }
 
+  .scrollbar-6::-webkit-scrollbar {
+    width: 6px;
+    height: 10px;
+  }
+
   .scrollbar-8::-webkit-scrollbar {
     width: 8px;
     height: 10px;

@@ -16,7 +16,11 @@ const ChatBox = ({ conversation, update, socket }) => {
     if (conversation !== null && conversation) {
       if (conversation.messages.length !== 0) {
         const data = conversation.messages.slice().sort((a, b) => {
-          return a.createdAt - b.createdAt
+          const dateA = new Date(a.updatedAt)
+          const dateB = new Date(b.updatedAt)
+
+          // Compare the Date objects for sorting
+          return dateB - dateA
         })
 
         setMessages(data)
@@ -32,9 +36,8 @@ const ChatBox = ({ conversation, update, socket }) => {
     }
   }, [conversation])
 
-  //Send a message
-  const handleKeyPress = async (e) => {
-    if (e.key === "Enter" && text !== "") {
+  const sendMessage = async () => {
+    if (text !== "") {
       setLoading(true)
 
       const message = {
@@ -76,17 +79,44 @@ const ChatBox = ({ conversation, update, socket }) => {
             <h1 className="font-bold text-xl mb-4 border-b-2 border-green-300 px-2">
               {otherUser.firstName} {otherUser.lastName}
             </h1>
-            <div className="flex flex-col justify-between px-2">
+            <div className="flex flex-col-reverse justify-between px-2 max-h-[288px] overflow-y-auto scrollbar scrollbar-6">
               {messages.length === 0 ? (
                 <div>No messages</div>
               ) : (
                 messages.map((message) => (
                   <div key={message._id} className="my-1">
                     {message.senderID === currentUser.uid ? (
-                      <div>{message.message} right</div>
+                      <h4 className="font-bold text-pink">
+                        You{" "}
+                        <span className="text-[10px] text-slate-500">
+                          {new Date(message.createdAt)
+                            .toLocaleString("en-AU", {
+                              year: "numeric",
+                              month: "2-digit",
+                              day: "2-digit",
+                              hour: "2-digit",
+                              minute: "2-digit",
+                            })
+                            .replace(/,/, "")}
+                        </span>
+                      </h4>
                     ) : (
-                      <div>{message.message} left</div>
+                      <h4 className="font-bold text-slate-700">
+                        {otherUser.firstName} {otherUser.lastName}{" "}
+                        <span className="text-[10px] text-slate-500">
+                          {new Date(message.createdAt)
+                            .toLocaleString("en-AU", {
+                              year: "numeric",
+                              month: "2-digit",
+                              day: "2-digit",
+                              hour: "2-digit",
+                              minute: "2-digit",
+                            })
+                            .replace(/,/, "")}
+                        </span>
+                      </h4>
                     )}
+                    <p>{message.message}</p>
                   </div>
                 ))
               )}
@@ -99,10 +129,17 @@ const ChatBox = ({ conversation, update, socket }) => {
               placeholder="Type a Message"
               value={text}
               onChange={(e) => setText(e.target.value)}
-              onKeyDown={handleKeyPress}
+              onKeyDown={(e) => {
+                if (e.key === "Enter") {
+                  sendMessage()
+                }
+              }}
               className="input w-full font-montserrat"
             />
-            <button className="absolute right-2 top-[6px] slate text-green-400 font-palanquin disabled:text-slate-500 hover:text-pink">
+            <button
+              className="absolute right-2 top-[6px] slate text-green-400 font-palanquin disabled:text-slate-500 hover:text-pink"
+              onClick={sendMessage}
+            >
               <IoMdSend size={25} />
             </button>
           </div>
