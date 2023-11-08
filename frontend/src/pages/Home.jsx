@@ -19,6 +19,7 @@ const Home = () => {
     setCurrentConversation(conversation)
   }
 
+  //Delete the conversation
   const deleteConversation = async (id) => {
     try {
       await axios.delete(`http://localhost:5555/conversations/${id}`)
@@ -84,7 +85,7 @@ const Home = () => {
     //Receiving web socket data
     socket.on("message", (data) => {
       console.log("Received")
-      updateConversations(data)
+      //updateConversations(data)
     })
 
     //Get all the conversations of a user
@@ -92,7 +93,6 @@ const Home = () => {
       .get(`http://localhost:5555/conversations/${currentUser.uid}`)
       .then((response) => {
         setConversations(response.data.data)
-        setCurrentConversation(response.data.data[0])
         setLoading(false)
       })
       .catch((error) => {
@@ -105,6 +105,24 @@ const Home = () => {
       socket.disconnect()
     }
   }, [])
+
+  //Put new conversations on top
+  useEffect(() => {
+    if (conversations.length !== 0) {
+      const filter = conversations.slice().sort((a, b) => {
+        const dateA = new Date(a.updatedAt)
+        const dateB = new Date(b.updatedAt)
+
+        // Compare the Date objects for sorting
+        return dateB - dateA
+      })
+
+      if (filter[0]._id !== conversations[0]._id) {
+        setConversations(filter)
+        setCurrentConversation(filter[0])
+      }
+    }
+  }, [conversations])
 
   return (
     <div className="main-container">
