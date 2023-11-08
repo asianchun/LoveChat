@@ -131,7 +131,7 @@ const Home = () => {
         <section>
           <SearchPopup addConversation={addConversation} />
           <div className="font-palanquin mt-2 mb-1">
-            <h2 className="uppercase mb-2 font-semibold">Direct messages</h2>
+            <h2 className="uppercase mb-2 font-semibold">Chats</h2>
             {loading ? (
               <Spinner />
             ) : (

@@ -34,7 +34,10 @@ const Conversations = ({
               (participant) =>
                 participant.fireID !== currentUser.uid && (
                   <p key={participant._id}>
-                    {participant.firstName} {participant.lastName}
+                    {participant.firstName}{" "}
+                    <span className="max-sm:hidden">
+                      {participant.lastName}
+                    </span>
                   </p>
                 )
             )}
