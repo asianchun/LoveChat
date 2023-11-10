@@ -56,7 +56,7 @@ const Login = () => {
               disabled={loading}
               className="button btn-green"
             >
-              Reset Password
+              Reset
             </button>
           </div>
         </div>
@@ -64,7 +64,7 @@ const Login = () => {
           <button
             onClick={() => navigate("/")}
             disabled={loading}
-            className="mb-2 text-pink hover:underline"
+            className="mb-2 text-pink hover:underline fotn-montserrat"
           >
             Cancel
           </button>
