@@ -45,7 +45,7 @@ const Home = () => {
     )
 
     if (!isExistingConversation) {
-      setConversations([...conversations, conversation])
+      setConversations([conversation, ...conversations])
     }
   }
 
@@ -61,7 +61,23 @@ const Home = () => {
       return conversation
     })
 
-    setConversations(update)
+    const filter = filterConversations(update)
+
+    setConversations(filter)
+  }
+
+  const receiveMessage = async (newConversation) => {}
+
+  const filterConversations = (conversations) => {
+    const filter = conversations.slice().sort((a, b) => {
+      const dateA = new Date(a.updatedAt)
+      const dateB = new Date(b.updatedAt)
+
+      // Compare the Date objects for sorting
+      return dateB - dateA
+    })
+
+    return filter
   }
 
   useEffect(() => {
@@ -85,14 +101,17 @@ const Home = () => {
     //Receiving web socket data
     socket.on("message", (data) => {
       console.log("Received")
-      //updateConversations(data)
+      receiveMessage(data)
     })
 
     //Get all the conversations of a user
     axios
       .get(`http://localhost:5555/conversations/${currentUser.uid}`)
       .then((response) => {
-        setConversations(response.data.data)
+        const filter = filterConversations(response.data.data)
+
+        setConversations(filter)
+        setCurrentConversation(filter[0])
         setLoading(false)
       })
       .catch((error) => {
@@ -105,25 +124,6 @@ const Home = () => {
       socket.disconnect()
     }
   }, [])
-
-  //Put new conversations on top
-  useEffect(() => {
-    if (conversations.length !== 0) {
-      const filter = conversations.slice().sort((a, b) => {
-        const dateA = new Date(a.updatedAt)
-        const dateB = new Date(b.updatedAt)
-
-        // Compare the Date objects for sorting
-        return dateB - dateA
-      })
-
-      setCurrentConversation(filter[0])
-
-      if (filter[0]._id !== conversations[0]._id) {
-        setConversations(filter)
-      }
-    }
-  }, [conversations])
 
   return (
     <div className="main-container">
