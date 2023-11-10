@@ -41,7 +41,7 @@ mongoose
       console.log("Connected")
       socket.on("message", (message) => {
         console.log(`Received message: ${message}`)
-        io.emit("message", message)
+        socket.broadcast.emit("message", message)
       })
     })
   })

@@ -13,6 +13,7 @@ const ChatBox = ({ conversation, update, socket }) => {
   //Update the current conversation of a chatBox
   useEffect(() => {
     if (conversation !== null && conversation) {
+      setText("")
       if (conversation.messages.length !== 0) {
         const data = conversation.messages.slice().sort((a, b) => {
           const dateA = new Date(a.updatedAt)
@@ -133,7 +134,7 @@ const ChatBox = ({ conversation, update, socket }) => {
                   sendMessage()
                 }
               }}
-              className="input w-full font-montserrat"
+              className="input w-full font-montserrat pr-10"
             />
             <button
               className="absolute right-2 top-[6px] slate text-green-400 font-palanquin disabled:text-slate-500 hover:text-pink"

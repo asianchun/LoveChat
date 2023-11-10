@@ -1,12 +1,14 @@
 import { useAuth } from "../../firebase/AuthContext"
 import { useState, useEffect } from "react"
 import { AiOutlineClose } from "react-icons/ai"
+import { GoDotFill } from "react-icons/go"
 
 const Conversations = ({
   conversations,
   selectConversation,
   currentConversation,
   deleteConversation,
+  unread,
 }) => {
   const { currentUser } = useAuth()
   const [focused, setFocused] = useState(currentConversation)
@@ -41,11 +43,15 @@ const Conversations = ({
                   </p>
                 )
             )}
+            <GoDotFill
+              className={`text-pink ${
+                unread.includes(conversation._id) ? "block" : "hidden"
+              }`}
+            />
             <AiOutlineClose
-              key={conversation._id}
               onClick={() => deleteConversation(conversation._id)}
               className={`hover:text-pink text-slate-700 ${
-                focused._id === conversation._id ? "visible" : "invisible"
+                focused._id === conversation._id ? "block" : "hidden"
               }`}
             />
           </div>

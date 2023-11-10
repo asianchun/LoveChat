@@ -10,6 +10,7 @@ import { io } from "socket.io-client"
 const Home = () => {
   const [loading, setLoading] = useState(false)
   const [conversations, setConversations] = useState([])
+  const [unread, setUnread] = useState([])
   const [currentConversation, setCurrentConversation] = useState(null)
   const { currentUser } = useAuth()
   const [socket, setSocket] = useState(null)
@@ -17,6 +18,10 @@ const Home = () => {
   //Update the current conversation
   const setConversationMessages = (conversation) => {
     setCurrentConversation(conversation)
+
+    if (unread.includes(conversation._id)) {
+      setUnread(unread.filter((message) => message !== conversation._id))
+    }
   }
 
   //Delete the conversation
@@ -66,7 +71,23 @@ const Home = () => {
     setConversations(filter)
   }
 
-  const receiveMessage = async (newConversation) => {}
+  const receiveMessage = async (newConversation) => {
+    setUnread([...unread, newConversation._id])
+    if (conversations.length === 0) {
+      try {
+        const result = await axios.get(
+          `http://localhost:5555/conversations/${currentUser.uid}`
+        )
+
+        const filter = filterConversations(result.data.data)
+        setConversations(filter)
+      } catch (error) {
+        console.log(error)
+      }
+    } else {
+      updateConversations(newConversation)
+    }
+  }
 
   const filterConversations = (conversations) => {
     const filter = conversations.slice().sort((a, b) => {
@@ -140,6 +161,7 @@ const Home = () => {
                 conversations={conversations}
                 selectConversation={setConversationMessages}
                 deleteConversation={deleteConversation}
+                unread={unread}
               />
             )}
           </div>
