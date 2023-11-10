@@ -1,13 +1,18 @@
 import { useState } from "react"
 import { useAuth } from "../firebase/AuthContext"
-import { useNavigate } from "react-router-dom"
+import { useNavigate, useLocation } from "react-router-dom"
 import Snackbar from "../components/Snackbar"
 import InputBox from "../components/InputBox"
 
 const Login = () => {
+  const location = useLocation()
+
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
   const [error, setError] = useState("")
+  const [reset, setReset] = useState(
+    location.state ? location.state.reset : false
+  )
   const [loading, setLoading] = useState(false)
   const [showPassword, setShowPassword] = useState(false)
   const { login } = useAuth()
@@ -44,6 +49,13 @@ const Login = () => {
             type="error"
             action={() => setError("")}
             text="Invalid email or password"
+          />
+        )}
+        {reset && (
+          <Snackbar
+            type="success"
+            action={() => setReset(false)}
+            text="Password reset has been sent"
           />
         )}
         <div>

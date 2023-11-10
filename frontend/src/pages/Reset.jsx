@@ -7,7 +7,6 @@ import InputBox from "../components/InputBox"
 const Login = () => {
   const [email, setEmail] = useState("")
   const [error, setError] = useState("")
-  const [reset, setReset] = useState(false)
   const [loading, setLoading] = useState(false)
   const { resetPassword } = useAuth()
   const navigate = useNavigate()
@@ -16,13 +15,11 @@ const Login = () => {
   const handleClick = async (event) => {
     setLoading(true)
     setError("")
-    setReset(false)
 
     try {
       await resetPassword(email)
       setLoading(false)
-      setReset(true)
-      //navigate("/login", { state: { reset: true } })
+      navigate("/login", { state: { reset: true } })
     } catch (error) {
       console.log(error)
       setError("Invalid Email")
@@ -42,13 +39,6 @@ const Login = () => {
             type="error"
             action={() => setError("")}
             text="Invalid email"
-          />
-        )}
-        {reset && (
-          <Snackbar
-            type="success"
-            action={() => setReset(false)}
-            text="Password reset has been sent"
           />
         )}
         <div>
