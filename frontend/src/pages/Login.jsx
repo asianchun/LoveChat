@@ -15,15 +15,12 @@ const Login = () => {
 
   //Toggle show password
   const toggleShow = (e) => {
-    e.preventDefault()
     setShowPassword(!showPassword)
   }
 
   //Login the user
   const handleClick = async (event) => {
     if (email !== "" && password !== "") {
-      event.preventDefault()
-
       try {
         setError("")
         setLoading(true)
@@ -49,7 +46,7 @@ const Login = () => {
             text="Invalid email or password"
           />
         )}
-        <form>
+        <div>
           <InputBox
             style="mb-4"
             type="email"
@@ -73,6 +70,12 @@ const Login = () => {
             >
               {showPassword ? "hide" : "show"}
             </button>
+            <button
+              onClick={() => navigate("/reset")}
+              className="w-full text-end hover:underline text-sm font-palanquin text-pink"
+            >
+              Forgot password?
+            </button>
           </div>
           <div className="mt-9 text-center mb-4">
             <button
@@ -83,7 +86,7 @@ const Login = () => {
               Login
             </button>
           </div>
-        </form>
+        </div>
         <div className="text-center">
           <button
             onClick={() => navigate("/signup")}
