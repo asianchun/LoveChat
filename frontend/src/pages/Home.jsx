@@ -71,24 +71,6 @@ const Home = () => {
     setConversations(filter)
   }
 
-  const receiveMessage = async (newConversation) => {
-    setUnread([...unread, newConversation._id])
-    if (conversations.length === 0) {
-      try {
-        const result = await axios.get(
-          `http://localhost:5555/conversations/${currentUser.uid}`
-        )
-
-        const filter = filterConversations(result.data.data)
-        setConversations(filter)
-      } catch (error) {
-        console.log(error)
-      }
-    } else {
-      updateConversations(newConversation)
-    }
-  }
-
   const filterConversations = (conversations) => {
     const filter = conversations.slice().sort((a, b) => {
       const dateA = new Date(a.updatedAt)
@@ -104,27 +86,6 @@ const Home = () => {
   useEffect(() => {
     setLoading(true)
 
-    //Connect to web socket server
-    const socket = io("http://localhost:5555", {
-      transports: ["websocket"],
-    })
-    setSocket(socket)
-
-    //Set up event listeners for incoming messages
-    socket.on("connect", () => {
-      console.log("Connected to the socket")
-    })
-
-    socket.on("disconnect", () => {
-      console.log("Disconnected from the socket")
-    })
-
-    //Receiving web socket data
-    socket.on("message", (data) => {
-      console.log("Received")
-      receiveMessage(data)
-    })
-
     //Get all the conversations of a user
     axios
       .get(`http://localhost:5555/conversations/${currentUser.uid}`)
@@ -139,12 +100,34 @@ const Home = () => {
         console.log(error)
         setLoading(false)
       })
+  }, [])
+
+  useEffect(() => {
+    //Connect to web socket server
+    const socket = io("http://localhost:5555", {
+      transports: ["websocket"],
+    })
+    setSocket(socket)
+
+    //Set up event listeners for incoming messages
+    socket.on("connect", () => {
+      console.log("Connected to the socket")
+    })
+
+    socket.on("disconnect", () => {
+      console.log("Disconnected from the socket")
+    })
+    //Receiving web socket data
+    socket.on("message", (data) => {
+      console.log("Received")
+      updateConversations(data)
+    })
 
     //Clean up on unmount
     return () => {
       socket.disconnect()
     }
-  }, [])
+  }, [conversations])
 
   return (
     <div className="main-container">
