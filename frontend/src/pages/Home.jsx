@@ -71,6 +71,23 @@ const Home = () => {
     setConversations(filter)
   }
 
+  const receiveMessage = (newConversation) => {
+    if (currentConversation._id === newConversation._id) {
+      updateConversations(newConversation)
+    } else {
+      const update = conversations.map((conversation) => {
+        if (conversation._id === newConversation._id) {
+          return newConversation
+        }
+        return conversation
+      })
+
+      const filter = filterConversations(update)
+
+      setConversations(filter)
+    }
+  }
+
   const filterConversations = (conversations) => {
     const filter = conversations.slice().sort((a, b) => {
       const dateA = new Date(a.updatedAt)
@@ -94,6 +111,7 @@ const Home = () => {
 
         setConversations(filter)
         setCurrentConversation(filter[0])
+        console.log("this is being done")
         setLoading(false)
       })
       .catch((error) => {
@@ -119,15 +137,14 @@ const Home = () => {
     })
     //Receiving web socket data
     socket.on("message", (data) => {
-      console.log("Received")
-      updateConversations(data)
+      receiveMessage(data)
     })
 
     //Clean up on unmount
     return () => {
       socket.disconnect()
     }
-  }, [conversations])
+  }, [currentConversation])
 
   return (
     <div className="main-container">
