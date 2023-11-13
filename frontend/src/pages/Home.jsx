@@ -22,6 +22,7 @@ const Home = () => {
     readConversation(conversation)
   }
 
+  //Read the conversation, update it in the database as well
   const readConversation = (conversation) => {
     if (unread.includes(conversation._id)) {
       setUnread(unread.filter((message) => message !== conversation._id))
@@ -84,6 +85,7 @@ const Home = () => {
     setConversations(filter)
   }
 
+  //Add a new message to an unread array
   const receiveMessage = (newConversation) => {
     setUnread([...unread, newConversation._id])
     if (currentConversation._id === newConversation._id) {
@@ -102,6 +104,7 @@ const Home = () => {
     }
   }
 
+  //Make sure the newest message is on top
   const filterConversations = (conversations) => {
     const filter = conversations.slice().sort((a, b) => {
       const dateA = new Date(a.updatedAt)

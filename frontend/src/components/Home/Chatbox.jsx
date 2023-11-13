@@ -36,6 +36,7 @@ const ChatBox = ({ conversation, update, socket, selectConversation }) => {
     }
   }, [conversation])
 
+  //Send a message
   const sendMessage = async () => {
     if (text !== "") {
       setLoading(true)
