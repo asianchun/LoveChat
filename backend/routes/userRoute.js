@@ -1,5 +1,6 @@
 import express from "express"
 import { User } from "../models/UserModel.js"
+import { Conversation } from "../models/conversationModel.js"
 
 const router = express.Router()
 
@@ -98,6 +99,17 @@ router.put("/:id", async (req, res) => {
         },
       },
       { new: true }
+    )
+
+    await Conversation.updateMany(
+      { "participants._id": id },
+      {
+        $set: {
+          "participants.$.firstName": req.body.firstName,
+          "participants.$.lastName": req.body.lastName,
+          "participants.$.phoneNumber": req.body.phoneNumber,
+        },
+      }
     )
 
     if (!result) {
