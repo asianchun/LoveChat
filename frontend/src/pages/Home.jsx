@@ -13,6 +13,7 @@ const Home = () => {
   const [unread, setUnread] = useState([])
   const [currentConversation, setCurrentConversation] = useState(null)
   const { currentUser } = useAuth()
+  const [user, setUser] = useState(null)
   const [socket, setSocket] = useState(null)
 
   //Update the current conversation
@@ -21,6 +22,15 @@ const Home = () => {
 
     if (unread.includes(conversation._id)) {
       setUnread(unread.filter((message) => message !== conversation._id))
+
+      axios
+        .put(`http://localhost:5555/users/read/${user._id}/${conversation._id}`)
+        .then((response) => {
+          console.log("success")
+        })
+        .catch((error) => {
+          console.log(error)
+        })
     }
   }
 
@@ -72,6 +82,7 @@ const Home = () => {
   }
 
   const receiveMessage = (newConversation) => {
+    setUnread([...unread, newConversation._id])
     if (currentConversation._id === newConversation._id) {
       updateConversations(newConversation)
     } else {
@@ -111,12 +122,21 @@ const Home = () => {
 
         setConversations(filter)
         setCurrentConversation(filter[0])
-        console.log("this is being done")
         setLoading(false)
       })
       .catch((error) => {
         console.log(error)
         setLoading(false)
+      })
+
+    axios
+      .get(`http://localhost:5555/users/${currentUser.uid}`)
+      .then((response) => {
+        setUser(response.data[0])
+        setUnread(response.data[0].unread)
+      })
+      .catch((error) => {
+        console.log(error)
       })
   }, [])
 

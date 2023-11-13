@@ -111,4 +111,29 @@ router.put("/:id", async (req, res) => {
   }
 })
 
+//Read a message
+router.put("/read/:id/:conversation", async (req, res) => {
+  try {
+    const { id, conversation } = req.params
+    const result = await User.findByIdAndUpdate(
+      id,
+      {
+        $pull: {
+          unread: conversation,
+        },
+      },
+      { new: true }
+    )
+
+    if (!result) {
+      return res.status(404).json({ message: "User not found" })
+    }
+
+    return res.status(201).send(result)
+  } catch (error) {
+    console.log(error.message)
+    res.status(500).send({ message: error.message })
+  }
+})
+
 export default router

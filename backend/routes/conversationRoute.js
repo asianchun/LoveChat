@@ -1,5 +1,6 @@
 import express from "express"
 import { Conversation } from "../models/conversationModel.js"
+import { User } from "../models/UserModel.js"
 
 const router = express.Router()
 
@@ -91,17 +92,22 @@ router.put("/:id", async (req, res) => {
 
     const { id } = req.params
     const conversation = await Conversation.findById(id)
-    const messages = conversation.messages
     const newMessage = req.body.message
-    messages.push(newMessage)
+    const receiver = conversation.participants.filter(
+      (participant) => participant.fireID !== req.body.message.senderID
+    )
 
     const result = await Conversation.findByIdAndUpdate(
       id,
       {
-        $set: { messages: messages },
+        $push: { messages: newMessage },
       },
       { new: true }
     )
+
+    await User.findByIdAndUpdate(receiver[0]._id, {
+      $addToSet: { unread: conversation._id.toString() },
+    })
 
     if (!result) {
       return res.status(404).json({ message: "Conversation not found" })

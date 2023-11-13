@@ -22,6 +22,10 @@ const userSchema = mongoose.Schema(
       type: String,
       required: true,
     },
+    unread: {
+      type: Array,
+      required: false,
+    },
   },
   {
     timestamps: true,
