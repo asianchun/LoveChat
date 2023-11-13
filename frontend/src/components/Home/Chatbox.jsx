@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react"
+import { useState, useEffect, useRef } from "react"
 import { useAuth } from "../../firebase/AuthContext"
 import axios from "axios"
 import { IoMdSend } from "react-icons/io"
@@ -9,11 +9,12 @@ const ChatBox = ({ conversation, update, socket, selectConversation }) => {
   const [text, setText] = useState("")
   const [messages, setMessages] = useState([])
   const [loading, setLoading] = useState(false)
+  const inputRef = useRef(null)
 
   //Update the current conversation of a chatBox
   useEffect(() => {
     if (conversation !== null && conversation) {
-      setText("")
+      inputRef.current.focus()
       if (conversation.messages.length !== 0) {
         const data = conversation.messages.slice().sort((a, b) => {
           const dateA = new Date(a.updatedAt)
@@ -128,6 +129,7 @@ const ChatBox = ({ conversation, update, socket, selectConversation }) => {
             onClick={() => selectConversation(conversation)}
           >
             <input
+              ref={inputRef}
               type="text"
               placeholder="Type a Message"
               value={text}
@@ -136,6 +138,8 @@ const ChatBox = ({ conversation, update, socket, selectConversation }) => {
               onKeyDown={(e) => {
                 if (e.key === "Enter") {
                   sendMessage()
+                } else {
+                  selectConversation(conversation)
                 }
               }}
               className="input w-full font-montserrat pr-10"
