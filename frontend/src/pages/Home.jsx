@@ -19,7 +19,10 @@ const Home = () => {
   //Update the current conversation
   const setConversationMessages = (conversation) => {
     setCurrentConversation(conversation)
+    readConversation(conversation)
+  }
 
+  const readConversation = (conversation) => {
     if (unread.includes(conversation._id)) {
       setUnread(unread.filter((message) => message !== conversation._id))
 
@@ -190,6 +193,7 @@ const Home = () => {
           conversation={currentConversation}
           update={updateConversations}
           socket={socket}
+          selectConversation={readConversation}
         />
       </div>
     </div>

@@ -3,7 +3,7 @@ import { useAuth } from "../../firebase/AuthContext"
 import axios from "axios"
 import { IoMdSend } from "react-icons/io"
 
-const ChatBox = ({ conversation, update, socket }) => {
+const ChatBox = ({ conversation, update, socket, selectConversation }) => {
   const { currentUser } = useAuth()
   const [otherUser, setOtherUser] = useState({})
   const [text, setText] = useState("")
@@ -122,7 +122,10 @@ const ChatBox = ({ conversation, update, socket }) => {
               )}
             </div>
           </div>
-          <div className="relative">
+          <div
+            className="relative"
+            onClick={() => selectConversation(conversation)}
+          >
             <input
               type="text"
               placeholder="Type a Message"
