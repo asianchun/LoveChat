@@ -1,0 +1,16 @@
+{
+  "name": "mernchat",
+  "version": "1.0.0",
+  "description": "Welcome to the MERN Chat Application! This real-time chat platform is built using the MERN (MongoDB, Express.js, React, Node.js) stack and utilizes Firebase for secure authentication. Experience live communication with features such as user login, sign up, profile editing, user search, chat initiation, chat deletion, and real-time updates using sockets.",
+  "main": "index.js",
+  "scripts": {
+    "install-server": "cd backend && npm install",
+    "start-server": "cd backend && npm run start",
+    "install-client": "cd frontend && npm install",
+    "build-client": "cd frontend && npm run build",
+    "start-client": "cd frontend && npm run start"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}

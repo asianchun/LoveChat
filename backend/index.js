@@ -12,7 +12,13 @@ const app = express()
 //Middleware for parsing request body
 app.use(express.json())
 
-app.use(cors())
+app.use(
+  cors({
+    origin: "http://localhost:5173",
+    methods: ["GET", "POST", "PUT", "DELETE"],
+    allowedHeaders: ["Content-Type"],
+  })
+)
 
 //Home Route
 app.get("/", (req, res) => {
