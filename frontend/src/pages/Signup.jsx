@@ -49,7 +49,7 @@ const Signup = () => {
           fireID,
         }
 
-        await axios.post("http://localhost:5555/users", data)
+        await axios.post("https://mern-chat-fnmn.onrender.com/users", data)
         navigate("/")
       } catch (error) {
         setLoading(false)
