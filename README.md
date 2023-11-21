@@ -13,7 +13,7 @@ Welcome to the MERN Chat Application! This real-time chat platform is built usin
 
 ## Demo
 
-Check out the live demo of the Chat App [here](#).
+Check out the live demo of the Chat App [here](https://mern-front-ep51.onrender.com/).
 
 ## Features
 
