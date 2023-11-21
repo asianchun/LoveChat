@@ -33,7 +33,7 @@ const Profile = () => {
         }
 
         const result = await axios.put(
-          `http://localhost:5555/users/${user._id}`,
+          `https://mern-chat-fnmn.onrender.com/users/${user._id}`,
           data
         )
 
@@ -50,7 +50,7 @@ const Profile = () => {
   //Load the current user information
   useEffect(() => {
     axios
-      .get(`http://localhost:5555/users/${currentUser.uid}`)
+      .get(`https://mern-chat-fnmn.onrender.com/users/${currentUser.uid}`)
       .then((response) => {
         setUser(response.data[0])
       })

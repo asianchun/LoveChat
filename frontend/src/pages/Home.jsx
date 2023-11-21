@@ -28,7 +28,9 @@ const Home = () => {
       setUnread(unread.filter((message) => message !== conversation._id))
 
       axios
-        .put(`http://localhost:5555/users/read/${user._id}/${conversation._id}`)
+        .put(
+          `https://mern-chat-fnmn.onrender.com/users/read/${user._id}/${conversation._id}`
+        )
         .then((response) => {
           console.log("success")
         })
@@ -41,7 +43,9 @@ const Home = () => {
   //Delete the conversation
   const deleteConversation = async (id) => {
     try {
-      await axios.delete(`http://localhost:5555/conversations/${id}`)
+      await axios.delete(
+        `https://mern-chat-fnmn.onrender.com/conversations/${id}`
+      )
 
       const newConversations = conversations.filter(
         (conversation) => conversation._id !== id
@@ -122,7 +126,9 @@ const Home = () => {
 
     //Get all the conversations of a user
     axios
-      .get(`http://localhost:5555/conversations/${currentUser.uid}`)
+      .get(
+        `https://mern-chat-fnmn.onrender.com/conversations/${currentUser.uid}`
+      )
       .then((response) => {
         const filter = filterConversations(response.data.data)
 
@@ -136,7 +142,7 @@ const Home = () => {
       })
 
     axios
-      .get(`http://localhost:5555/users/${currentUser.uid}`)
+      .get(`https://mern-chat-fnmn.onrender.com/users/${currentUser.uid}`)
       .then((response) => {
         setUser(response.data[0])
         setUnread(response.data[0].unread)
@@ -148,7 +154,7 @@ const Home = () => {
 
   useEffect(() => {
     //Connect to web socket server
-    const socket = io("http://localhost:5555", {
+    const socket = io("https://mern-chat-fnmn.onrender.com", {
       transports: ["websocket"],
     })
     setSocket(socket)

@@ -18,7 +18,7 @@ const SearchPopup = ({ addConversation }) => {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:5555/users/all/${currentUser.uid}`)
+      .get(`https://mern-chat-fnmn.onrender.com/users/all/${currentUser.uid}`)
       .then((response) => {
         setUsers(response.data.data)
       })
@@ -51,12 +51,14 @@ const SearchPopup = ({ addConversation }) => {
 
       axios
         .get(
-          `http://localhost:5555/conversations/check/${currentUser.uid}/${selectedUser.fireID}`
+          `https://mern-chat-fnmn.onrender.com/conversations/check/${currentUser.uid}/${selectedUser.fireID}`
         )
         .then((res) => {
           if (res.data.data.length === 0) {
             axios
-              .get(`http://localhost:5555/users/${currentUser.uid}`)
+              .get(
+                `https://mern-chat-fnmn.onrender.com/users/${currentUser.uid}`
+              )
               .then((response) => {
                 const data = {
                   messages: [],
@@ -64,7 +66,10 @@ const SearchPopup = ({ addConversation }) => {
                 }
 
                 axios
-                  .post("http://localhost:5555/conversations", data)
+                  .post(
+                    "https://mern-chat-fnmn.onrender.com/conversations",
+                    data
+                  )
                   .then((response) => {
                     addConversation(response.data)
                   })

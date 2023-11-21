@@ -49,7 +49,7 @@ const ChatBox = ({ conversation, update, socket, selectConversation }) => {
 
       //Create a new message
       const response = await axios.post(
-        "http://localhost:5555/messages",
+        "https://mern-chat-fnmn.onrender.com/messages",
         message
       )
 
@@ -59,7 +59,7 @@ const ChatBox = ({ conversation, update, socket, selectConversation }) => {
 
       //Add a message into a conversation
       const result = await axios.put(
-        `http://localhost:5555/conversations/${conversation._id}`,
+        `https://mern-chat-fnmn.onrender.com/conversations/${conversation._id}`,
         data
       )
 
