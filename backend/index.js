@@ -14,7 +14,7 @@ app.use(express.json())
 
 app.use(
   cors({
-    origin: "https://mern-front-ep51.onrender.com/",
+    origin: "https://mern-front-ep51.onrender.com",
     methods: ["GET", "POST", "PUT", "DELETE"],
     allowedHeaders: ["Content-Type"],
   })
